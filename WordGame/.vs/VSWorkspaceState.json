@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\WordGame",
+    "\\WordGame\\Controllers",
+    "\\WordGame\\Views",
+    "\\WordGame\\Views\\Shared"
+  ],
+  "SelectedNode": "\\WordGame\\Controllers\\WordController.cs",
+  "PreviewInSolutionExplorer": false
+}

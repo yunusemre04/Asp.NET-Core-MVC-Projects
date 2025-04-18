@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AsvLYSzl2Er/u5GmL1s8AXQ09ggO7pGy1/UhTEIS8Rm8vFRhVwpimbjoeulXy6ETRnMNJO7he/mRqIlNq1LAKQ==",
+  "dgSpecHash": "Rh6KcKSfJZvE+Eoj2JI3/7JAIy+w4JLRmgJQGMmfoUtEzC4Qo2JF3yJms4XsvxVGTwTivalt+jxeWed/k8iYVA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Yunus Emre\\Desktop\\dersler\\Mvc\\Asp.NET Core MVC Projects\\WordGame\\WordGame\\WordGame.csproj",
+  "projectFilePath": "C:\\Users\\Yunus Emre\\Desktop\\dersler\\Mvc\\Asp.NET Core MVC Projects\\Asp.NET-Core-MVC-Projects\\WordGame\\WordGame\\WordGame.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Yunus Emre\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Yunus Emre\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

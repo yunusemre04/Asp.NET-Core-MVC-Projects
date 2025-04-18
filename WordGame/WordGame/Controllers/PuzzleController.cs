@@ -56,6 +56,7 @@ namespace WordGame.Controllers
 
             return View("Result");
         }
+
     }
 
 }
