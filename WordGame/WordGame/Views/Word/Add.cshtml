@@ -1,0 +1,28 @@
+﻿@using WordGame.Models.ViewModels;
+@model AddWordViewModel
+
+<h2>Kelime Ekle</h2>
+
+<form asp-action="Add" method="post" enctype="multipart/form-data">
+    <div>
+        <label>İngilizce Kelime</label>
+        <input asp-for="EngWordName" class="form-control" />
+    </div>
+    <div>
+        <label>Türkçe Anlamı</label>
+        <input asp-for="TurWordName" class="form-control" />
+    </div>
+    <div>
+        <label>Resim Yükle</label>
+        <input asp-for="PictureFile" type="file" class="form-control" />
+    </div>
+    <div>
+        <label class="h5 mt-2">Örnek Cümleler</label>
+        <br />
+        @for (int i = 0; i < 3; i++)
+        {   <label>Cümle @(i+1)</label>
+            <input name="SampleSentences[@i]" class="form-control mb-1" />
+        }
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Kaydet</button>
+</form>

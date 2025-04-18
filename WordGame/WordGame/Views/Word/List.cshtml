@@ -1,0 +1,24 @@
+﻿@using WordGame.Models.Entities;
+@model IEnumerable<Word>
+
+<h2>Eklenmiş Kelimeler</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Resim</th>
+            <th>İngilizce</th>
+            <th>Türkçe</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var word in Model)
+        {
+            <tr>
+                <td style="width:8rem"><img style="width:8rem;height:5rem;" src=@word.Picture /></td>
+                <td>@word.EngWordName</td>
+                <td>@word.TurWordName</td>
+            </tr>
+        }
+    </tbody>
+</table>

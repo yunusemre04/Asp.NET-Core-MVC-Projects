@@ -1,0 +1,33 @@
+﻿@using WordGame.Models.ViewModels;
+@model UserStatsViewModel
+
+<h2>Öğrenme Analizi</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Toplam Çalışılan Kelime</th>
+        <td>@Model.TotalWorkedWords</td>
+    </tr>
+    <tr>
+        <th>Tamamen Öğrenilen (6 Sefer)</th>
+        <td>@Model.TotalCompletedWords</td>
+    </tr>
+    <tr>
+        <th>Yanlış Deneme Sayısı</th>
+        <td>@Model.TotalWrongAttempts</td>
+    </tr>
+    <tr>
+        <th>Başarı Oranı</th>
+        <td>@Model.SuccessRate %</td>
+    </tr>
+</table>
+
+<h4>En Çok Zorlandığınız Kelimeler</h4>
+<ul>
+    @foreach (var word in Model.HardestWords)
+    {
+        <li>@word</li>
+    }
+</ul>
+
+<a onclick="window.print()" class="btn btn-outline-primary">Çıktı Al</a>
