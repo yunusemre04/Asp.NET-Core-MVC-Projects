@@ -3,9 +3,11 @@
     "",
     "\\WordGame",
     "\\WordGame\\Controllers",
+    "\\WordGame\\Models",
+    "\\WordGame\\Models\\Entities",
     "\\WordGame\\Views",
     "\\WordGame\\Views\\Shared"
   ],
-  "SelectedNode": "\\WordGame\\Controllers\\WordController.cs",
+  "SelectedNode": "\\WordGame\\Models\\Entities\\Word.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -17,6 +17,11 @@
         public string? Picture { get; set; }
 
         public ICollection<WordSample>? WordSamples { get; set; }
+
+        public string? MnemonicNote { get; set; } // açıklama
+
+        public string? MnemonicImagePath { get; set; } // opsiyonel görsel
+
     }
 
 }
