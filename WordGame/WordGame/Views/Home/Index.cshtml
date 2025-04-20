@@ -1,8 +1,106 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "WordGame";
+    var userName = Context.Session.GetString("UserName");
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    .hero {
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        color: white;
+        padding: 80px 20px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-top: 15px;
+            opacity: 0.9;
+        }
+
+    .action-btn {
+        padding: 15px 30px;
+        font-size: 1.1rem;
+        border-radius: 30px;
+    }
+
+    .highlight-card {
+        transition: 0.3s ease;
+    }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+</style>
+
+<div class="container mt-4">
+
+    <!-- HERO SECTION -->
+    <div class="hero text-center mb-5">
+        <h1>🧠 WordGame’e Hoş Geldin</h1>
+        @if (userName != null)
+        {
+            <p>Merhaba <strong>@userName</strong>! Hadi bilgilerini tazele ve yeni kelimeler öğren.</p>
+            <div class="mt-4 d-flex justify-content-center gap-3 flex-wrap">
+                <a class="btn btn-light text-primary action-btn" asp-controller="Quiz" asp-action="Select">
+                    <i class="fa-solid fa-spell-check me-2"></i> Quiz Başlat
+                </a>
+                <a class="btn btn-outline-light action-btn" asp-controller="Word" asp-action="Add">
+                    <i class="fa-solid fa-plus me-2"></i> Yeni Kelime Ekle
+                </a>
+            </div>
+        }
+        else
+        {
+            <p>Kelime hazineni oyunlarla güçlendirmek için şimdi kayıt ol veya giriş yap.</p>
+            <div class="mt-4 d-flex justify-content-center gap-3 flex-wrap">
+                <a class="btn btn-light text-primary action-btn" asp-controller="Auth" asp-action="Login">
+                    <i class="fa-solid fa-right-to-bracket me-2"></i> Giriş Yap
+                </a>
+                <a class="btn btn-outline-light action-btn" asp-controller="Auth" asp-action="Register">
+                    <i class="fa-solid fa-user-plus me-2"></i> Kayıt Ol
+                </a>
+            </div>
+        }
+    </div>
+
+    <!-- FEATURE CARDS -->
+    <div class="row text-center g-4">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm highlight-card h-100">
+                <div class="card-body">
+                    <i class="fa-solid fa-brain fa-2x text-primary mb-3"></i>
+                    <h5 class="card-title">6 Sefer Tekrar</h5>
+                    <p class="card-text">Öğrenmenin kalıcılığı için özel algoritma ile tekrar sistemi.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm highlight-card h-100">
+                <div class="card-body">
+                    <i class="fa-solid fa-puzzle-piece fa-2x text-success mb-3"></i>
+                    <h5 class="card-title">Bulmaca ve Oyunlar</h5>
+                    <p class="card-text">Kelimeleri oyunlarla pekiştir. Eğlenirken öğren!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm highlight-card h-100">
+                <div class="card-body">
+                    <i class="fa-solid fa-chart-line fa-2x text-warning mb-3"></i>
+                    <h5 class="card-title">İstatistik ve Analiz</h5>
+                    <p class="card-text">Kendi gelişimini gör, güçlü ve zayıf yönlerini keşfet.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

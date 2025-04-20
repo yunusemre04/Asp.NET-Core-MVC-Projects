@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Quiz Seçimi";
+}
+
+<h3 class="text-center mb-4">Quiz Başlat</h3>
+
+<form asp-controller="Quiz" asp-action="StartRandom" method="get" class="text-center">
+    <label class="form-label h5">Kaç kelimelik quiz yapmak istersiniz?</label>
+    <select name="count" class="form-select w-50 mx-auto mb-3">
+        <option value="5">5 Kelime</option>
+        <option value="10">10 Kelime</option>
+        <option value="15">15 Kelime</option>
+    </select>
+
+    <button type="submit" class="btn btn-primary">
+        <i class="fa-solid fa-play me-1"></i> Quiz'e Başla
+    </button>
+</form>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-warning text-center mt-4">
+        @TempData["Error"]
+    </div>
+}

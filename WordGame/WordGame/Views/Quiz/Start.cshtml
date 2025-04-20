@@ -1,23 +1,96 @@
-﻿@using WordGame.Models.Entities;
+﻿@using WordGame.Models.Entities
 @model List<Word>
 
-<h2>Quiz</h2>
+@{
+    ViewData["Title"] = "Quiz";
+}
 
-<form asp-action="Submit" method="post">
-    @for (int i = 0; i < Model.Count; i++)
-    {
-        <div class="border p-3 mb-3">
-            <h4>@Model[i].EngWordName</h4>
-            <p><strong>Türkçe Anlamı:</strong> @Model[i].TurWordName</p>
-
-            <div>
-                <label>Bu kelimeyi doğru bildiniz mi?</label><br />
-                <input type="radio" name="Answers[@i].IsCorrect" value="true" required /> Evet
-                <input type="radio" name="Answers[@i].IsCorrect" value="false" /> Hayır
-                <input type="hidden" name="Answers[@i].WordId" value="@Model[i].WordId" />
-            </div>
-        </div>
+<style>
+    body {
+        background: #f4f6f8;
     }
 
-    <button type="submit" class="btn btn-primary">Gönder</button>
-</form>
+    .quiz-container {
+        max-width: 800px;
+        margin: 50px auto;
+        background: #ffffff;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .quiz-card {
+        border: 1px solid #dee2e6;
+        border-radius: 14px;
+        padding: 25px;
+        margin-bottom: 25px;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .quiz-card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+
+        .quiz-card h5 {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .quiz-card p {
+            color: #7f8c8d;
+        }
+
+    .form-check-label {
+        font-weight: 500;
+        color: #34495e;
+    }
+
+    .btn-quiz-submit {
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        border: none;
+        padding: 12px 24px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: white;
+        border-radius: 30px;
+        transition: 0.2s ease-in-out;
+    }
+
+        .btn-quiz-submit:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+        }
+</style>
+
+<div class="quiz-container">
+
+    <h3 class="text-center mb-4"><i class="fa-solid fa-question-circle text-primary me-2"></i>Kelime Quiz</h3>
+
+    <form asp-action="Submit" method="post">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <div class="quiz-card">
+                <h5>@Model[i].EngWordName</h5>
+                <p><strong>Türkçe Anlamı:</strong> @Model[i].TurWordName</p>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="Answers[@i].IsCorrect" value="true" required id="yes_@i" />
+                    <label class="form-check-label" for="yes_@i">✅ Doğru bildim</label>
+                </div>
+
+                <div class="form-check mt-1">
+                    <input class="form-check-input" type="radio" name="Answers[@i].IsCorrect" value="false" id="no_@i" />
+                    <label class="form-check-label" for="no_@i">❌ Bilemedim</label>
+                </div>
+
+                <input type="hidden" name="Answers[@i].WordId" value="@Model[i].WordId" />
+            </div>
+        }
+
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-quiz-submit">
+                <i class="fa-solid fa-paper-plane me-2"></i> Cevapları Gönder
+            </button>
+        </div>
+    </form>
+</div>

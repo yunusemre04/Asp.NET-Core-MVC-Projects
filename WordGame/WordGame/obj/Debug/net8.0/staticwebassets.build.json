@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "g3ZZoDSe0Vbprecvlde3IGPbBetH6DzggUErah4wNXw=",
+  "Hash": "tsk+RDaKjIp8sHT/g1EKcrK27EURdKLsLVYUAV3E8ec=",
   "Source": "WordGame",
   "BasePath": "_content/WordGame",
   "Mode": "Default",
@@ -110,6 +110,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\wordImages\\anonim\\5b0b86b9-cbd4-45e4-9c2e-cf5ea6b50a15.png"
+    },
+    {
+      "Identity": "C:\\Users\\Yunus Emre\\Desktop\\dersler\\Mvc\\Asp.NET Core MVC Projects\\Asp.NET-Core-MVC-Projects\\WordGame\\WordGame\\wwwroot\\images\\wordImages\\emreA\\71375838-2203-473e-9869-7db5a667b376.webp",
+      "SourceId": "WordGame",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Yunus Emre\\Desktop\\dersler\\Mvc\\Asp.NET Core MVC Projects\\Asp.NET-Core-MVC-Projects\\WordGame\\WordGame\\wwwroot\\",
+      "BasePath": "_content/WordGame",
+      "RelativePath": "images/wordImages/emreA/71375838-2203-473e-9869-7db5a667b376.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\wordImages\\emreA\\71375838-2203-473e-9869-7db5a667b376.webp"
     },
     {
       "Identity": "C:\\Users\\Yunus Emre\\Desktop\\dersler\\Mvc\\Asp.NET Core MVC Projects\\Asp.NET-Core-MVC-Projects\\WordGame\\WordGame\\wwwroot\\js\\site.js",

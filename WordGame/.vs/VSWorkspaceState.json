@@ -6,8 +6,11 @@
     "\\WordGame\\Models",
     "\\WordGame\\Models\\Entities",
     "\\WordGame\\Views",
-    "\\WordGame\\Views\\Shared"
+    "\\WordGame\\Views\\Auth",
+    "\\WordGame\\Views\\Quiz",
+    "\\WordGame\\Views\\Shared",
+    "\\WordGame\\Views\\Word"
   ],
-  "SelectedNode": "\\WordGame\\Models\\Entities\\Word.cs",
+  "SelectedNode": "\\WordGame\\Views\\Quiz\\Select.cshtml",
   "PreviewInSolutionExplorer": false
 }

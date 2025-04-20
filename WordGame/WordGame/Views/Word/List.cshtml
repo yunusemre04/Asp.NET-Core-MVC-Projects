@@ -1,25 +1,102 @@
-﻿@using WordGame.Models.Entities;
+﻿@using WordGame.Models.Entities
 @model IEnumerable<Word>
 
-<h2>Eklenmiş Kelimeler</h2>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Resim</th>
-            <th>İngilizce</th>
-            <th>Türkçe</th>
-            <th>İşlem</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var word in Model)
-        {
-            <tr>
-                <td style="width:8rem"><img style="width:8rem;height:5rem;" src=@word.Picture /></td>
-                <td>@word.EngWordName</td>
-                <td>@word.TurWordName</td>
-                <td> <a asp-controller="Mnemonic" asp-action="Add" asp-route-wordId="@word.WordId">Hafıza Çivisi Ekle</a></td>
-            </tr>
+@{
+    ViewData["Title"] = "Kelime Listesi";
+}
+
+<style>
+    .compact-gallery {
+        max-width: 1100px;
+        margin: 50px auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .word-card {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+        background: #ffffff;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+        transition: 0.2s ease-in-out;
+    }
+
+    .word-card:hover {
+        transform: scale(1.02);
+    }
+
+    .word-img {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+    }
+
+    .word-body {
+        padding: 15px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .word-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 4px;
+    }
+
+    .word-subtitle {
+        font-size: 0.95rem;
+        color: #7f8c8d;
+    }
+
+    .btn-mnemonic {
+        align-self: start;
+        background: #2575fc;
+        color: white;
+        font-size: 0.85rem;
+        padding: 6px 12px;
+        border-radius: 20px;
+        transition: all 0.2s ease-in-out;
+        text-decoration: none;
+        margin-top: 10px;
+    }
+
+    .btn-mnemonic:hover {
+        background: #1e5edc;
+    }
+
+    @@media (max-width: 768px) {
+        .word-card {
+            max-width: 100%;
         }
-    </tbody>
-</table>
+
+        .word-img {
+            height: 120px;
+        }
+    }
+</style>
+
+<h2 class="text-center mb-4"><i class="fa-solid fa-layer-group text-primary me-2"></i>Kelime Kartları</h2>
+
+<div class="compact-gallery">
+    @foreach (var word in Model)
+    {
+        <div class="word-card">
+            <img src="@word.Picture" class="word-img" alt="Kelime görseli" />
+            <div class="word-body">
+                <div class="word-title">@word.EngWordName</div>
+                <div class="word-subtitle">@word.TurWordName</div>
+                <a asp-controller="Mnemonic" asp-action="Add" asp-route-wordId="@word.WordId" class="btn-mnemonic">
+                    <i class="fa-solid fa-lightbulb me-1"></i> Hafıza Çivisi
+                </a>
+            </div>
+        </div>
+    }
+</div>

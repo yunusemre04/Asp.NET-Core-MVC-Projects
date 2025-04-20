@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\images\\wordImages\\anonim\\5b0b86b9-cbd4-45e4-9c2e-cf5ea6b50a15.png"
     },
     {
+      "Id": "C:\\Users\\Yunus Emre\\Desktop\\dersler\\Mvc\\Asp.NET Core MVC Projects\\Asp.NET-Core-MVC-Projects\\WordGame\\WordGame\\wwwroot\\images\\wordImages\\emreA\\71375838-2203-473e-9869-7db5a667b376.webp",
+      "PackagePath": "staticwebassets\\images\\wordImages\\emreA\\71375838-2203-473e-9869-7db5a667b376.webp"
+    },
+    {
       "Id": "C:\\Users\\Yunus Emre\\Desktop\\dersler\\Mvc\\Asp.NET Core MVC Projects\\Asp.NET-Core-MVC-Projects\\WordGame\\WordGame\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

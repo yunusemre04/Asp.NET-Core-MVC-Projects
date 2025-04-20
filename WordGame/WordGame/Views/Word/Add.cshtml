@@ -1,28 +1,143 @@
-﻿@using WordGame.Models.ViewModels;
+﻿@using WordGame.Models.ViewModels
 @model AddWordViewModel
 
-<h2>Kelime Ekle</h2>
+@{
+    ViewData["Title"] = "Kelime Ekle";
+}
 
-<form asp-action="Add" method="post" enctype="multipart/form-data">
-    <div>
-        <label>İngilizce Kelime</label>
-        <input asp-for="EngWordName" class="form-control" />
+<style>
+    body {
+        background: #f4f7fa;
+    }
+
+    .modern-word-card {
+        max-width: 600px;
+        margin: 70px auto;
+        padding: 45px 35px;
+        border-radius: 20px;
+        background: linear-gradient(to bottom right, #ffffff, #f0f4ff);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .modern-word-card:hover {
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+    }
+
+    .modern-title {
+        font-size: 2rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 30px;
+        color: #2c3e50;
+    }
+
+    .form-label {
+        font-weight: 500;
+        color: #34495e;
+    }
+
+    .form-control {
+        border-radius: 10px;
+    }
+
+    .form-control:focus {
+        border-color: #6a11cb;
+        box-shadow: 0 0 0 0.2rem rgba(106, 17, 203, 0.2);
+    }
+
+    .btn-modern {
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        border: none;
+        color: white;
+        font-weight: 600;
+        padding: 12px;
+        border-radius: 30px;
+        font-size: 1.1rem;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .btn-modern:hover {
+        transform: translateY(-2px);
+        opacity: 0.95;
+    }
+
+    .form-text-muted {
+        font-size: 0.85rem;
+        color: #7f8c8d;
+    }
+
+    .preview-image {
+        display: none;
+        width: 100%;
+        max-height: 200px;
+        object-fit: cover;
+        border-radius: 12px;
+        margin-top: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+</style>
+
+<div class="modern-word-card">
+
+    <div class="modern-title">
+        <i class="fa-solid fa-circle-plus text-primary me-2"></i> Yeni Kelime Ekle
     </div>
-    <div>
-        <label>Türkçe Anlamı</label>
-        <input asp-for="TurWordName" class="form-control" />
-    </div>
-    <div>
-        <label>Resim Yükle</label>
-        <input asp-for="PictureFile" type="file" class="form-control" />
-    </div>
-    <div>
-        <label class="h5 mt-2">Örnek Cümleler</label>
-        <br />
-        @for (int i = 0; i < 3; i++)
-        {   <label>Cümle @(i+1)</label>
-            <input name="SampleSentences[@i]" class="form-control mb-1" />
+
+    <form asp-action="Add" method="post" enctype="multipart/form-data" novalidate>
+        <div class="mb-4">
+            <img id="imagePreview" class="preview-image" alt="Seçilen görsel önizlemesi" />
+            <label asp-for="PictureFile" class="form-label">Kelimeye ait görsel</label>
+            <input asp-for="PictureFile" type="file" class="form-control" accept="image/*" onchange="previewImage(event)" />
+            <span asp-validation-for="PictureFile" class="text-danger small"></span>   
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="EngWordName" class="form-label">İngilizce Kelime</label>
+            <input asp-for="EngWordName" class="form-control" placeholder="Örn: innovation" />
+            <span asp-validation-for="EngWordName" class="text-danger small"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="TurWordName" class="form-label">Türkçe Anlamı</label>
+            <input asp-for="TurWordName" class="form-control" placeholder="Örn: yenilik" />
+            <span asp-validation-for="TurWordName" class="text-danger small"></span>
+        </div>
+
+        <hr />
+
+        <div class="mb-3">
+            <label class="form-label">Örnek Cümleler</label>
+            @for (int i = 0; i < 3; i++)
+            {
+                <input name="SampleSentences[@i]" class="form-control mb-2" placeholder="Cümle @(i + 1)" />
+            }
+        </div>
+
+        <button type="submit" class="btn btn-modern w-100 mt-3">
+            <i class="fa-solid fa-cloud-upload-alt me-2"></i> Kaydet ve Ekle
+        </button>
+    </form>
+</div>
+
+<script>
+    function previewImage(event) {
+        const input = event.target;
+        const preview = document.getElementById("imagePreview");
+        const file = input.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = "block";
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "";
+            preview.style.display = "none";
         }
-    </div>
-    <button type="submit" class="btn btn-primary mt-2">Kaydet</button>
-</form>
+    }
+</script>

@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace WordGame.Controllers
 {
 
-    
-
     namespace WordGame.Controllers
     {
         public class AuthController : Controller
@@ -36,7 +34,7 @@ namespace WordGame.Controllers
 
                 if (!result)
                 {
-                    ModelState.AddModelError("", "Bu e-posta adresi zaten kullanımda.");
+                    ModelState.AddModelError("Email", "Bu e-posta adresi zaten kullanımda.");
                     return View(model);
                 }
 
@@ -62,6 +60,7 @@ namespace WordGame.Controllers
 
                 if (user == null)
                 {
+                    TempData["LoginError"] = "Kullanıcı Adı veya Şifre Hatalı";
                     ModelState.AddModelError("", "Geçersiz e-posta veya şifre.");
                     return View(model);
                 }
