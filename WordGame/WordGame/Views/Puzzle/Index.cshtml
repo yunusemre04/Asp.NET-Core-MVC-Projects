@@ -1,22 +1,129 @@
 ﻿@using WordGame.Models.ViewModels;
-@model List<PuzzleItemViewModel>
+@model PuzzleGameViewModel
+@{
+    var puzzleWord = Context.Session.GetString("PuzzleWord") ?? "";
+}
 
-<h2>Bulmaca</h2>
+<style>
+    .wordle-board {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-width: 100%;
+        margin: 40px auto;
+    }
 
-<form asp-action="Submit" method="post">
-    @for (int i = 0; i < Model.Count; i++)
+    .wordle-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, 60px);
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .wordle-tile {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        text-transform: uppercase;
+        color: white;
+        pointer-events: none;
+    }
+
+    .correct {
+        background-color: #6aaa64;
+    }
+
+    .present {
+        background-color: #c9b458;
+    }
+
+    .absent {
+        background-color: #787c7e;
+    }
+
+    .hinted {
+        background-color: #3498db;
+    }
+
+    .guess-form {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+        .guess-form input {
+            width: 160px;
+            padding: 10px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .guess-form button {
+            margin-left: 10px;
+            padding: 10px 18px;
+            background-color: #2575fc;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+        }
+
+    .message {
+        text-align: center;
+        font-size: 1.1rem;
+        margin-top: 25px;
+    }
+</style>
+
+<h2 class="text-center mb-4">🧩 Bulmaca (Wordle)</h2>
+
+<div class="wordle-board" >
+    @foreach (var attempt in Model.Attempts)
     {
-        <div class="mb-3 border p-2">
-            <strong>@Model[i].ScrambledWord</strong>
-
-            <input name="userAnswers" class="form-control mt-1" placeholder="Tahmininiz" />
-
-            <!-- doğru cevabı da gizli olarak gönder -->
-            <input type="hidden" name="correctAnswers" value="@Model[i].CorrectAnswer" />
+        <div class="wordle-row">
+            @for (int i = 0; i < puzzleWord.Length; i++)
+            {
+                var letter = i < attempt.Feedback.Count ? attempt.Feedback[i] : new PuzzleLetterFeedback { Letter = ' ', Status = "absent" };
+                <div class="wordle-tile @letter.Status">@letter.Letter</div>
+            }
         </div>
     }
 
-    <button type="submit" class="btn btn-success">Cevapları Gönder</button>
-</form>
 
+    @for (int i = Model.Attempts.Count; i < 6; i++)
+    {
+        <div class="wordle-row">
+            @for (int j = 0; j < puzzleWord.Length; j++)
+            {
+                <div class="wordle-tile absent"></div>
+            }
+        </div>
+    }
 
+</div>
+
+@if (!Model.IsGameOver)
+{
+    <div class="guess-form ">
+        <form asp-action="Submit" method="post">
+            <input name="guess"  maxlength="@puzzleWord.Length" minlength="@puzzleWord.Length" required placeholder="@puzzleWord.Length harfli kelime" />
+            <button type="submit">Tahmin Et</button>
+        </form>
+
+    </div>
+}
+else
+{
+    <div class="message">
+        <strong>@Model.Message</strong>
+        <div class="mt-3">
+            <a asp-action="Restart" asp-controller="Puzzle" class="btn btn-success">Yeni Oyun Başlat</a>
+        </div>
+    </div>
+}

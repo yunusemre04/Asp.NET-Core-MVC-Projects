@@ -55,11 +55,14 @@ namespace WordGame.Controllers
                 imagePath = Path.Combine("/", folderPath, fileName).Replace("\\", "/");
             }
 
+            var userId = HttpContext.Session.GetInt32("UserId");
+
             var word = new Word
             {
                 EngWordName = model.EngWordName,
                 TurWordName = model.TurWordName,
-                Picture = imagePath
+                Picture = imagePath,
+                UserId=userId.Value
             };
 
             _context.Words.Add(word);

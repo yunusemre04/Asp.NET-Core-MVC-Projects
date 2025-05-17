@@ -15,6 +15,12 @@ namespace WordGame.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        public IActionResult Select()
+        {
+            return View();
+        }
+
         public IActionResult Start()
         {
             var userId = HttpContext.Session.GetInt32("UserId");
@@ -80,6 +86,8 @@ namespace WordGame.Controllers
                 }
 
                 _context.SaveChanges(); // Yeni kayıtları DB'ye yaz
+
+                return View("Start", todayQuizWords);
             }
 
 
@@ -92,11 +100,8 @@ namespace WordGame.Controllers
 
             return View("Start", todayQuizWords);
         }
-        [HttpGet]
-        public IActionResult Select()
-        {
-            return View();
-        }
+
+    
 
         private List<Word> GetTodayWords(int userId)
         {
@@ -104,9 +109,6 @@ namespace WordGame.Controllers
             var progressList = _context.QuizProgresses
                 .Where(q => q.UserId == userId && !q.IsCompleted)
                 .ToList();
-
-          
-
             var now = DateTime.Now;
 
             foreach (var progress in progressList)
@@ -140,6 +142,8 @@ namespace WordGame.Controllers
             return wordList;
         }
 
+
+
         private DateTime GetNextRepeatDate(DateTime lastDate, int correctCount)
         {
             return correctCount switch
@@ -161,13 +165,24 @@ namespace WordGame.Controllers
             if (userId == null)
                 return RedirectToAction("Login", "Auth");
 
+            int correctCount = 0;
+
             foreach (var answer in model.Answers)
             {
+                var word = await _context.Words
+                    .Include(w => w.WordSamples)
+                    .FirstOrDefaultAsync(w => w.WordId == answer.WordId);
+
                 var progress = await _context.QuizProgresses
                     .FirstOrDefaultAsync(p => p.UserId == userId && p.WordId == answer.WordId);
 
-                if (answer.IsCorrect)
+                // Küçük büyük harf farkı yok!
+                bool isCorrect = string.Equals(word?.TurWordName?.Trim(), answer.UserAnswer?.Trim(), StringComparison.OrdinalIgnoreCase);
+
+                if (isCorrect)
                 {
+                    correctCount++;
+
                     if (progress == null)
                     {
                         progress = new QuizProgress
@@ -184,23 +199,20 @@ namespace WordGame.Controllers
                     {
                         progress.CorrectCount++;
                         progress.LastAnsweredDate = DateTime.Now;
-
                         if (progress.CorrectCount >= 6)
-                        {
                             progress.IsCompleted = true;
-                        }
 
                         _context.QuizProgresses.Update(progress);
                     }
                 }
                 else
                 {
-                    // yanlışsa sıfırla
                     if (progress != null)
                     {
                         progress.CorrectCount = 0;
                         progress.LastAnsweredDate = DateTime.Now;
                         progress.IsCompleted = false;
+
                         _context.QuizProgresses.Update(progress);
                     }
                 }
@@ -208,12 +220,53 @@ namespace WordGame.Controllers
 
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Result");
+            ViewBag.Total = model.Answers.Count;
+            ViewBag.Correct = correctCount;
+
+            return View("Result");
         }
-        public IActionResult Result()
+
+
+        [HttpPost]
+        public IActionResult StartManualQuiz(List<int> selectedWordIds)
         {
-            return View();
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null || selectedWordIds == null || !selectedWordIds.Any())
+                return RedirectToAction("ManualSelect");
+
+            var todayWords = new List<Word>();
+
+            foreach (var wordId in selectedWordIds)
+            {
+                // Eğer daha önce eklenmemişse QuizProgress'e kaydet
+                var existing = _context.QuizProgresses
+                    .FirstOrDefault(p => p.UserId == userId && p.WordId == wordId);
+
+                if (existing == null)
+                {
+                    var progress = new QuizProgress
+                    {
+                        UserId = userId.Value,
+                        WordId = wordId,
+                        CorrectCount = 0,
+                        LastAnsweredDate = DateTime.Now.AddDays(-1), // hemen gösterilsin
+                        IsCompleted = false
+                    };
+                    _context.QuizProgresses.Add(progress);
+                }
+
+                // View'a göndermek için kelimeyi listeye ekle
+                var word = _context.Words.FirstOrDefault(w => w.WordId == wordId);
+                if (word != null)
+                    todayWords.Add(word);
+            }
+
+            _context.SaveChanges();
+
+            // Start.cshtml view'ına gönder
+            return View("Start", todayWords);
         }
+
 
     }
 

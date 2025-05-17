@@ -18,6 +18,10 @@
 
         public ICollection<WordSample>? WordSamples { get; set; }
 
+        public int UserId { get; set; }  
+        // Foreign Key
+        public User? User { get; set; }
+
         public string? MnemonicNote { get; set; } // açıklama
 
         public string? MnemonicImagePath { get; set; } // opsiyonel görsel

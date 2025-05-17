@@ -50,8 +50,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHV6emxlXFJlc3VsdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Yunus Emre/Desktop/dersler/Mvc/Asp.NET Core MVC Projects/Asp.NET-Core-MVC-Projects/WordGame/WordGame/Views/Quiz/ManualSelect.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxNYW51YWxTZWxlY3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Yunus Emre/Desktop/dersler/Mvc/Asp.NET Core MVC Projects/Asp.NET-Core-MVC-Projects/WordGame/WordGame/Views/Quiz/Result.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxSZXN1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Yunus Emre/Desktop/dersler/Mvc/Asp.NET Core MVC Projects/Asp.NET-Core-MVC-Projects/WordGame/WordGame/Views/Quiz/Select.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxTZWxlY3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Yunus Emre/Desktop/dersler/Mvc/Asp.NET Core MVC Projects/Asp.NET-Core-MVC-Projects/WordGame/WordGame/Views/Quiz/Start.cshtml]

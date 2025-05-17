@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WordGame.Data;
+using WordGame.Extensations;
 using WordGame.Models.ViewModels;
 
 namespace WordGame.Controllers
@@ -19,44 +20,99 @@ namespace WordGame.Controllers
             if (userId == null)
                 return RedirectToAction("Login", "Auth");
 
-            var kelimeler = _context.Words
-                .OrderBy(r => Guid.NewGuid()) // rastgele sırala
-                .Take(5)
-                .ToList();
-
-            var puzzleList = kelimeler.Select(k => new PuzzleItemViewModel
+            if (HttpContext.Session.GetString("PuzzleWord") == null)
             {
-                WordId = k.WordId,
-                CorrectAnswer = k.EngWordName,
-                ScrambledWord = Shuffle(k.EngWordName)
-            }).ToList();
+                var word = _context.QuizProgresses
+                    .Where(p => p.UserId == userId && p.IsCompleted)
+                    .Join(_context.Words, p => p.WordId, w => w.WordId, (p, w) => w)
+                    .Where(w => w.EngWordName.Length >= 3 && w.EngWordName.Length <= 8)
+                    .OrderBy(x => Guid.NewGuid())
+                    .Select(w => w.EngWordName.ToUpper())
+                    .FirstOrDefault();
 
-            return View(puzzleList);
-        }
+                if (word == null)
+                {
+                    TempData["Error"] = "Uygun uzunlukta öğrenilmiş bir kelime bulunamadı.";
+                    return RedirectToAction("Index", "Home");
+                }
 
-        private string Shuffle(string input)
-        {
-            var rng = new Random();
-            return new string(input.OrderBy(c => rng.Next()).ToArray());
+                HttpContext.Session.SetString("PuzzleWord", word);
+            }
+
+            return View(new PuzzleGameViewModel());
         }
 
         [HttpPost]
-        public IActionResult Submit(List<string> userAnswers, List<string> correctAnswers)
+        public IActionResult Submit(string guess, PuzzleGameViewModel model)
         {
-            int correctCount = 0;
+            var answer = HttpContext.Session.GetString("PuzzleWord");
+            if (answer == null)
+                return RedirectToAction("Index");
 
-            for (int i = 0; i < correctAnswers.Count; i++)
+            guess = guess?.Trim().ToUpper() ?? "";
+
+            if (guess.Length != answer.Length)
             {
-                if (userAnswers[i].Trim().ToLower() == correctAnswers[i].ToLower())
-                    correctCount++;
+                model.Message = $"Lütfen {answer.Length} harfli bir kelime girin.";
+                return View("Index", LoadModelFromSession(model)); // geçmişi geri yükle
             }
 
-            ViewBag.Total = correctAnswers.Count;
-            ViewBag.Correct = correctCount;
+            var feedback = new List<PuzzleLetterFeedback>();
+            for (int i = 0; i < answer.Length; i++)
+            {
+                var letter = guess[i];
+                string status = "absent";
 
-            return View("Result");
+                if (letter == answer[i])
+                    status = "correct";
+                else if (answer.Contains(letter))
+                    status = "present";
+
+                feedback.Add(new PuzzleLetterFeedback { Letter = letter, Status = status });
+            }
+
+            var attempts = HttpContext.Session.GetObjectFromJson<List<PuzzleAttemptViewModel>>("PuzzleAttempts") ?? new List<PuzzleAttemptViewModel>();
+            attempts.Add(new PuzzleAttemptViewModel { Feedback = feedback });
+
+            HttpContext.Session.SetObjectAsJson("PuzzleAttempts", attempts);
+
+            model = LoadModelFromSession(model);
+            model.AttemptCount = attempts.Count;
+            model.Attempts = attempts;
+
+            if (guess == answer)
+            {
+                model.IsSolved = true;
+                model.Message = "Tebrikler! 🎉 Doğru tahmin ettiniz.";
+            }
+            else if (model.AttemptCount >= 6)
+            {
+                model.Message = $"Hakkınız doldu. Doğru kelime: {answer}";
+            }
+
+            return View("Index", model);
         }
 
+
+
+        public IActionResult Restart()
+        {
+            HttpContext.Session.Remove("PuzzleWord");
+            HttpContext.Session.Remove("PuzzleAttempts");
+            return RedirectToAction("Index");
+        }
+
+
+        private PuzzleGameViewModel LoadModelFromSession(PuzzleGameViewModel model)
+        {
+           
+            model.Attempts = HttpContext.Session.GetObjectFromJson<List<PuzzleAttemptViewModel>>("PuzzleAttempts") ?? new List<PuzzleAttemptViewModel>();
+            model.AttemptCount = model.Attempts.Count;
+            return model;
+        }
     }
+
+    
+
 
 }

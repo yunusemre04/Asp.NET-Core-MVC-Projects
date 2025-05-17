@@ -18,6 +18,7 @@
 
         public int DailyWordLimit { get; set; } = 10; // varsayılan değer
 
+        public ICollection<Word>? Words { get; set; }
     }
 
 

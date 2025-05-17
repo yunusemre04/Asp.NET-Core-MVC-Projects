@@ -1,5 +1,68 @@
-﻿<h2>Quiz Tamamlandı</h2>
-<p>Bugünkü kelime tekrarın başarıyla tamamlandı. 👏</p>
+﻿@{
+    ViewData["Title"] = "Quiz Sonucu";
+    int total = ViewBag.Total ?? 0;
+    int correct = ViewBag.Correct ?? 0;
 
-<a asp-controller="Home" asp-action="Index" class="btn btn-success">Ana Sayfaya Dön</a>
+    double percent = total > 0 ? (double)correct / total * 100 : 0;
+    string message = percent switch
+    {
+        >= 90 => "Mükemmel! 💯",
+        >= 70 => "Harika! 🚀",
+        >= 50 => "Fena değil, devam! 🔄",
+        _ => "Daha çok çalışmalısın! 💪"
+    };
+}
+<style>
+    .result-container {
+        max-width: 600px;
+        margin: 80px auto;
+        padding: 40px;
+        background: linear-gradient(to bottom right, #fefefe, #eef3ff);
+        border-radius: 16px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
 
+    .result-score {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #2c3e50;
+    }
+
+    .result-message {
+        font-size: 1.2rem;
+        margin-top: 20px;
+        color: #6c757d;
+    }
+
+    .btn-return {
+        margin-top: 40px;
+        padding: 12px 24px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 30px;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: white;
+        border: none;
+    }
+
+        .btn-return:hover {
+            opacity: 0.9;
+        }
+</style>
+
+<div class="result-container">
+    <h2 class="mb-4"><i class="fa-solid fa-award me-2 text-warning"></i>Quiz Sonucu</h2>
+
+    <div class="result-score">
+        @correct / @total Doğru
+    </div>
+
+    <div class="result-message">
+        @message
+    </div>
+
+    <a asp-action="Select" class="btn btn-return mt-4">
+        <i class="fa-solid fa-rotate-right me-2"></i> Yeni Quiz Başlat
+    </a>
+</div>

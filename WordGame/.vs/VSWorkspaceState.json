@@ -2,15 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\WordGame",
-    "\\WordGame\\Controllers",
     "\\WordGame\\Models",
     "\\WordGame\\Models\\Entities",
     "\\WordGame\\Views",
     "\\WordGame\\Views\\Auth",
+    "\\WordGame\\Views\\Puzzle",
     "\\WordGame\\Views\\Quiz",
     "\\WordGame\\Views\\Shared",
     "\\WordGame\\Views\\Word"
   ],
-  "SelectedNode": "\\WordGame\\Views\\Quiz\\Select.cshtml",
+  "SelectedNode": "\\WordGame\\Views\\Puzzle\\Index.cshtml",
   "PreviewInSolutionExplorer": false
 }
