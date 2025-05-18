@@ -88,8 +88,17 @@
 <div class="compact-gallery">
     @foreach (var word in Model)
     {
-        <div class="word-card">
+        <div class="word-card position-relative">
+
+            <!-- X butonu -->
+            <button class="btn btn-sm position-absolute top-0 end-0 m-2 text-danger"
+                    data-bs-toggle="modal" data-bs-target="#deleteModal"
+                    data-word-id="@word.WordId" data-word-name="@word.EngWordName">
+                <i class="fa-solid fa-xmark fs-5 "></i>
+            </button>
+
             <img src="@word.Picture" class="word-img" alt="Kelime görseli" />
+
             <div class="word-body">
                 <div class="word-title">@word.EngWordName</div>
                 <div class="word-subtitle">@word.TurWordName</div>
@@ -98,5 +107,56 @@
                 </a>
             </div>
         </div>
+
     }
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 shadow-lg border-0">
+                <div class="modal-header  text-white rounded-top-4" style="background: linear-gradient(135deg, #6a11cb, #2575fc); box-shadow: 0 -5px 20px rgba(0,0,0,0.1);">
+                    <h5 class="modal-title fw-semibold" id="deleteModalLabel">
+                        <i class="fa-solid fa-triangle-exclamation me-2"></i> Kelimeyi Sil
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+
+                <div class="modal-body text-center px-4 py-3">
+                    <p class="mb-1">
+                        <i class="fa-solid fa-circle-info text-warning me-1"></i>
+                        <strong id="modalWordName"></strong> kelimesi için oluşturduğunuz <span class="fw-bold text-danger">tüm öğrenme ilerlemesi</span> silinecek.
+                    </p>
+                    <p class="text-muted small mb-0 mt-3">
+                        Bu işlem geri alınamaz. Devam etmek istiyor musunuz?
+                    </p>
+                </div>
+
+                <div class="modal-footer border-0 mt-0 justify-content-center pb-4">
+                    <form method="post" id="deleteForm" class="d-flex gap-3">
+                        <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">
+                            <i class="fa-solid fa-xmark me-1"></i> Vazgeç
+                        </button>
+                        <button type="submit" class="btn btn-danger px-4">
+                            <i class="fa-solid fa-trash me-1"></i> Evet, Sil
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+@section Scripts {
+    <script>
+        const deleteModal = document.getElementById('deleteModal');
+        deleteModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const wordId = button.getAttribute('data-word-id');
+            const wordName = button.getAttribute('data-word-name');
+
+            // Modal içeriğini güncelle
+            document.getElementById('modalWordName').textContent = wordName;
+            document.getElementById('deleteForm').action = `/Word/Delete/${wordId}`;
+        });
+    </script>
+}
+

@@ -12,17 +12,13 @@ namespace WordGame.Controllers
         {
             _logger = logger;
         }
-
+        //Returns Main Page
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
+        //Error Controle
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

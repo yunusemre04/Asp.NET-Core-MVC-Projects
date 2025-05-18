@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Rh6KcKSfJZvE+Eoj2JI3/7JAIy+w4JLRmgJQGMmfoUtEzC4Qo2JF3yJms4XsvxVGTwTivalt+jxeWed/k8iYVA==",
+  "dgSpecHash": "A7VDhJOcAHivEOM4Qc/YCr1eTf1YvJH2v5QsbKt+ZTx+J6o0iQNq/cD07dSN7mJUZBb4S6PwgvqqZm18ZoKlWg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Yunus Emre\\Desktop\\dersler\\Mvc\\Asp.NET Core MVC Projects\\Asp.NET-Core-MVC-Projects\\WordGame\\WordGame\\WordGame.csproj",
   "expectedPackageFiles": [
@@ -50,6 +50,7 @@
     "C:\\Users\\Yunus Emre\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "C:\\Users\\Yunus Emre\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\Yunus Emre\\.nuget\\packages\\mono.texttemplating\\3.0.0\\mono.texttemplating.3.0.0.nupkg.sha512",
+    "C:\\Users\\Yunus Emre\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\Yunus Emre\\.nuget\\packages\\system.clientmodel\\1.0.0\\system.clientmodel.1.0.0.nupkg.sha512",
     "C:\\Users\\Yunus Emre\\.nuget\\packages\\system.codedom\\6.0.0\\system.codedom.6.0.0.nupkg.sha512",
     "C:\\Users\\Yunus Emre\\.nuget\\packages\\system.collections.immutable\\7.0.0\\system.collections.immutable.7.0.0.nupkg.sha512",

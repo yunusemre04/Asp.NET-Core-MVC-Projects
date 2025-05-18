@@ -11,6 +11,16 @@
         >= 50 => "Fena değil, devam! 🔄",
         _ => "Daha çok çalışmalısın! 💪"
     };
+  
+    var results = new List<(string Eng, string Tur, bool IsCorrect)>();
+    if (TempData["AnswerResults"] != null)
+    {
+        results = Newtonsoft.Json.JsonConvert.DeserializeObject<List<(string Eng, string Tur, bool IsCorrect)>>(
+            TempData["AnswerResults"].ToString()
+        );
+    }
+
+
 }
 <style>
     .result-container {
@@ -60,7 +70,27 @@
 
     <div class="result-message">
         @message
-    </div>
+    </div>zzz
+
+    @if (results.Any())
+    {
+        <hr class="my-4" />
+        <h5 class="text-start mb-3"><i class="fa-solid fa-list-check text-success me-2"></i> Cevapların:</h5>
+        <ul class="list-group text-start">
+            @foreach (var item in results)
+            {
+                var icon = item.IsCorrect ? "fa-circle-check text-success" : "fa-circle-xmark text-danger";
+                var badge = item.IsCorrect ? "bg-success" : "bg-danger";
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>
+                        <strong>@item.Eng</strong> — <em>@item.Tur</em>
+                    </span>
+                    <i class="fa-solid @icon fs-5"></i>
+                </li>
+            }
+        </ul>
+    }
+
 
     <a asp-action="Select" class="btn btn-return mt-4">
         <i class="fa-solid fa-rotate-right me-2"></i> Yeni Quiz Başlat

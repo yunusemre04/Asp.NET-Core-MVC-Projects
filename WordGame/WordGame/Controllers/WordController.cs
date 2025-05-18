@@ -90,6 +90,26 @@ namespace WordGame.Controllers
             var words = _context.Words.ToList();
             return View(words);
         }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+                return RedirectToAction("Login", "Auth");
+
+            var word = _context.Words.FirstOrDefault(w => w.WordId == id && w.UserId == userId);
+            if (word == null) return NotFound();
+
+            var samples = _context.WordSamples.Where(s => s.WordId == id).ToList();
+            _context.WordSamples.RemoveRange(samples);
+            _context.Words.Remove(word);
+
+            _context.SaveChanges();
+            return RedirectToAction("List");
+        }
+
+
     }
 
 

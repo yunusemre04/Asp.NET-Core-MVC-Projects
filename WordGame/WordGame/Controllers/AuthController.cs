@@ -1,6 +1,8 @@
 ﻿using WordGame.Models.ViewModels;
 using WordGame.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using WordGame.Data;
 namespace WordGame.Controllers
 {
 
@@ -9,19 +11,21 @@ namespace WordGame.Controllers
         public class AuthController : Controller
         {
             private readonly AuthService _authService;
+            private readonly ApplicationDbContext _context;
 
-            public AuthController(AuthService authService)
+            public AuthController(AuthService authService,ApplicationDbContext context)
             {
                 _authService = authService;
+                _context = context;
             }
 
-            // Kullanıcı kayıt sayfasını gösterir
+            // Returns User Register Page
             public IActionResult Register()
             {
                 return View();
             }
 
-            // Kullanıcı kayıt işlemi
+            // User Register Process to Database
             [HttpPost]
             public async Task<IActionResult> Register(RegisterViewModel model)
             {
@@ -41,13 +45,13 @@ namespace WordGame.Controllers
                 return RedirectToAction("Login");
             }
 
-            // Kullanıcı giriş sayfasını gösterir
+            // Returns Log in Page
             public IActionResult Login()
             {
                 return View();
             }
 
-            // Kullanıcı giriş işlemi
+            // Users Log in Controle and Process
             [HttpPost]
             public async Task<IActionResult> Login(LoginViewModel model)
             {
@@ -65,20 +69,92 @@ namespace WordGame.Controllers
                     return View(model);
                 }
 
-                // Session'a kullanıcı bilgilerini kaydediyoruz
+                // Saving user information to Session
                 HttpContext.Session.SetString("UserName", user.UserName);
                 HttpContext.Session.SetInt32("UserId", user.UserId);
 
                 return RedirectToAction("Index", "Home");
             }
 
-            // Kullanıcı çıkış işlemi
+            // User Logout Process
             public IActionResult Logout()
             {
                 HttpContext.Session.Clear();
                 return RedirectToAction("Login");
             }
+
+            // Returns Forgot Password Page
+            [HttpGet]
+            public IActionResult ForgotPassword()
+            {
+                return View();
+            }
+
+            //The function returns new Password using Email information
+            [HttpPost]
+            public IActionResult ForgotPassword(ForgotPasswordViewModel model)
+            {
+                if (!ModelState.IsValid)
+                    return View(model);
+
+                var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
+                if (user == null)
+                {
+                    ModelState.AddModelError("Email", "Bu e-posta adresine kayıtlı kullanıcı bulunamadı.");
+                    return View(model);
+                }
+                
+                var newPassword = Guid.NewGuid().ToString().Substring(0, 8); 
+                user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(newPassword);
+                _context.Users.Update(user);
+                _context.SaveChanges();
+
+                ViewBag.Message = $"Yeni şifreniz: <strong>{newPassword}</strong><br/> Lütfen giriş yaptıktan sonra değiştirin.";
+
+                return View("ForgotPasswordResult");
+            }
+            //Returns Password Screen
+            [HttpGet]
+            public IActionResult ChangePassword()
+            {
+                if (HttpContext.Session.GetInt32("UserId") == null)
+                    return RedirectToAction("Login");
+
+                return View();
+            }
+
+            //Changing Password Process and Save to Database
+            [HttpPost]
+            public IActionResult ChangePassword(ChangePasswordViewModel model)
+            {
+                var userId = HttpContext.Session.GetInt32("UserId");
+                if (userId == null)
+                    return RedirectToAction("Login");
+
+                if (!ModelState.IsValid)
+                    return View(model);
+
+                var user = _context.Users.FirstOrDefault(u => u.UserId == userId);
+                if (user == null)
+                    return RedirectToAction("Login");
+
+                if (!BCrypt.Net.BCrypt.Verify(model.CurrentPassword, user.PasswordHash))
+                {
+                    ModelState.AddModelError("CurrentPassword", "Mevcut şifre yanlış");
+                    return View(model);
+                }
+
+                user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(model.NewPassword);
+                _context.Users.Update(user);
+                _context.SaveChanges();
+
+                ViewBag.Message = "Şifreniz başarıyla değiştirildi.";
+                return View("ChangePasswordSuccess");
+            }
+
+
         }
+
     }
 
 }

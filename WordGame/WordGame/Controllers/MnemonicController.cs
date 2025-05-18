@@ -9,12 +9,13 @@ namespace WordGame.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _env;
 
+        
         public MnemonicController(ApplicationDbContext context, IWebHostEnvironment env)
         {
             _context = context;
             _env = env;
         }
-
+        //Returns Add Mnemonic Page 
         [HttpGet]
         public IActionResult Add(int wordId)
         {
@@ -22,6 +23,7 @@ namespace WordGame.Controllers
             return View(model);
         }
 
+        //The function adding Image and mnemoic context to word
         [HttpPost]
         public async Task<IActionResult> Add(MnemonicViewModel model)
         {

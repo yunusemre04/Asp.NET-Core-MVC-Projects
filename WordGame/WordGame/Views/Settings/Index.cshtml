@@ -1,20 +1,99 @@
 ﻿@using WordGame.Models.ViewModels;
 @model UserSettingsViewModel
 
-<h2>Kullanıcı Ayarları</h2>
-
-@if (ViewBag.Message != null)
-{
-    <div class="alert alert-success">@ViewBag.Message</div>
+@{
+    ViewData["Title"] = "Kullanıcı Ayarları";
 }
 
-<form asp-action="Index" method="post">
-    <div class="form-group">
-        <label asp-for="DailyWordLimit"></label>
-        <input asp-for="DailyWordLimit" class="form-control" />
-        <span asp-validation-for="DailyWordLimit" class="text-danger"></span>
+<style>
+    .settings-card {
+        max-width: 500px;
+        margin: 60px auto;
+        padding: 35px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #ffffff, #f0f4ff);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .settings-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 25px;
+        color: #34495e;
+    }
+
+    .form-label {
+        font-weight: 600;
+    }
+
+    .form-control {
+        border-radius: 10px;
+    }
+
+        .form-control:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 0 0.15rem rgba(106, 17, 203, 0.2);
+        }
+
+    .btn-modern {
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        border: none;
+        color: white;
+        font-weight: 600;
+        padding: 12px 20px;
+        border-radius: 30px;
+        font-size: 1.05rem;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .btn-modern:hover {
+            transform: translateY(-2px);
+            opacity: 0.95;
+        }
+
+    .settings-footer {
+        text-align: center;
+        margin-top: 25px;
+    }
+
+        .settings-footer a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #2575fc;
+        }
+</style>
+
+<div class="settings-card">
+    <div class="settings-title">
+        <i class="fa-solid fa-gear text-primary me-2"></i> Kullanıcı Ayarları
     </div>
 
-    <button type="submit" class="btn btn-primary">Kaydet</button>
-</form>
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success text-center" role="alert">
+            <i class="fa-solid fa-check-circle me-1"></i> @ViewBag.Message
+        </div>
+    }
+
+    <form asp-action="Index" method="post" novalidate>
+        <div class="mb-3">
+            <label asp-for="DailyWordLimit" class="form-label">Günlük Yeni Kelime Limiti</label>
+            <input asp-for="DailyWordLimit" class="form-control" type="number" min="1" max="100" />
+            <span asp-validation-for="DailyWordLimit" class="text-danger small"></span>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-modern">
+                <i class="fa-solid fa-save me-2"></i> Ayarları Kaydet
+            </button>
+        </div>
+    </form>
+
+    <div class="settings-footer mt-4">
+        <a asp-controller="Auth" asp-action="ChangePassword">
+            <i class="fa-solid fa-key me-1"></i> Şifreni Değiştir
+        </a>
+    </div>
+</div>
 

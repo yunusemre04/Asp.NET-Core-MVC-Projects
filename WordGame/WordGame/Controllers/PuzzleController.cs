@@ -14,6 +14,7 @@ namespace WordGame.Controllers
             _context = context;
         }
 
+       
         public IActionResult Index()
         {
             var userId = HttpContext.Session.GetInt32("UserId");
@@ -33,7 +34,7 @@ namespace WordGame.Controllers
                 if (word == null)
                 {
                     TempData["Error"] = "Uygun uzunlukta öğrenilmiş bir kelime bulunamadı.";
-                    return RedirectToAction("Index", "Home");
+                    return View();
                 }
 
                 HttpContext.Session.SetString("PuzzleWord", word);

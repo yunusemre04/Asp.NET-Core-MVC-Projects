@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WordGame.Models.Entities
 {
@@ -14,5 +15,8 @@ namespace WordGame.Models.Entities
 
         public DateTime LastAnsweredDate { get; set; } // son bilindiği tarih
         public bool IsCompleted { get; set; } // 6 adımı tamamladı mı?
+
+        [ForeignKey("WordId")]
+        public Word? Word { get; set; }
     }
 }

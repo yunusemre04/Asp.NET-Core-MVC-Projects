@@ -1,20 +1,88 @@
-﻿@using WordGame.Models.ViewModels;
+﻿@using WordGame.Models.ViewModels
 @model MnemonicViewModel
 
-<h2>Hafıza Çivisi Ekle</h2>
+@{
+    ViewData["Title"] = "Hafıza Çivisi Ekle";
+}
 
-<form asp-action="Add" method="post" enctype="multipart/form-data">
-    <input type="hidden" asp-for="WordId" />
+<style>
+    .mnemonic-card {
+        max-width: 600px;
+        margin: 70px auto;
+        padding: 40px;
+        border-radius: 20px;
+        background: linear-gradient(145deg, #ffffff, #eef3ff);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease-in-out;
+    }
 
-    <div>
-        <label>Çağrışım / Not:</label>
-        <textarea asp-for="MnemonicNote" class="form-control"></textarea>
+        .mnemonic-card:hover {
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+        }
+
+    .mnemonic-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 30px;
+        color: #2c3e50;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #34495e;
+    }
+
+    .form-control {
+        border-radius: 10px;
+        transition: border-color 0.2s ease-in-out;
+    }
+
+        .form-control:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 0 0.2rem rgba(106, 17, 203, 0.15);
+        }
+
+    .btn-modern {
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        border: none;
+        color: white;
+        font-weight: 600;
+        padding: 12px 20px;
+        border-radius: 30px;
+        font-size: 1.05rem;
+        width: 100%;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .btn-modern:hover {
+            transform: translateY(-2px);
+            opacity: 0.95;
+        }
+</style>
+
+<div class="mnemonic-card">
+    <div class="mnemonic-title">
+        <i class="fa-solid fa-brain me-2 text-primary"></i> Hafıza Çivisi Ekle
     </div>
 
-    <div class="mt-2">
-        <label>Görsel (opsiyonel):</label>
-        <input asp-for="MnemonicImage" type="file" class="form-control" />
-    </div>
+    <form asp-action="Add" method="post" enctype="multipart/form-data" novalidate>
+        <input type="hidden" asp-for="WordId" />
 
-    <button type="submit" class="btn btn-primary mt-3">Kaydet</button>
-</form>
+        <div class="mb-3">
+            <label asp-for="MnemonicNote" class="form-label">Çağrışım / Not</label>
+            <textarea asp-for="MnemonicNote" class="form-control" rows="4" placeholder="Bu kelimeyi hatırlamak için ne kullanırsınız?"></textarea>
+            <span asp-validation-for="MnemonicNote" class="text-danger small"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="MnemonicImage" class="form-label">Görsel (opsiyonel)</label>
+            <input asp-for="MnemonicImage" type="file" class="form-control" />
+            <span asp-validation-for="MnemonicImage" class="text-danger small"></span>
+        </div>
+
+        <button type="submit" class="btn-modern">
+            <i class="fa-solid fa-paper-plane me-2"></i> Kaydet
+        </button>
+    </form>
+</div>

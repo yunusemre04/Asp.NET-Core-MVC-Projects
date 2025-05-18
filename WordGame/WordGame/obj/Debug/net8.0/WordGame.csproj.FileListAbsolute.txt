@@ -337,3 +337,4 @@ C:\Users\Yunus Emre\Desktop\dersler\Mvc\Asp.NET Core MVC Projects\Asp.NET-Core-M
 C:\Users\Yunus Emre\Desktop\dersler\Mvc\Asp.NET Core MVC Projects\Asp.NET-Core-MVC-Projects\WordGame\WordGame\obj\Debug\net8.0\WordGame.pdb
 C:\Users\Yunus Emre\Desktop\dersler\Mvc\Asp.NET Core MVC Projects\Asp.NET-Core-MVC-Projects\WordGame\WordGame\obj\Debug\net8.0\WordGame.genruntimeconfig.cache
 C:\Users\Yunus Emre\Desktop\dersler\Mvc\Asp.NET Core MVC Projects\Asp.NET-Core-MVC-Projects\WordGame\WordGame\obj\Debug\net8.0\ref\WordGame.dll
+C:\Users\Yunus Emre\Desktop\dersler\Mvc\Asp.NET Core MVC Projects\Asp.NET-Core-MVC-Projects\WordGame\WordGame\bin\Debug\net8.0\Newtonsoft.Json.dll

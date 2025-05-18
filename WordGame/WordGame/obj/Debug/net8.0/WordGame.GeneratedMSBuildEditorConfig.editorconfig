@@ -26,6 +26,22 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Yunus Emre\Desktop\dersler\Mvc\Asp.NET Core MVC Projects\Asp.NET-Core-MVC-Projects\WordGame\WordGame
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Yunus Emre/Desktop/dersler/Mvc/Asp.NET Core MVC Projects/Asp.NET-Core-MVC-Projects/WordGame/WordGame/Views/Auth/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxDaGFuZ2VQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Yunus Emre/Desktop/dersler/Mvc/Asp.NET Core MVC Projects/Asp.NET-Core-MVC-Projects/WordGame/WordGame/Views/Auth/ChangePasswordSuccess.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxDaGFuZ2VQYXNzd29yZFN1Y2Nlc3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Yunus Emre/Desktop/dersler/Mvc/Asp.NET Core MVC Projects/Asp.NET-Core-MVC-Projects/WordGame/WordGame/Views/Auth/ForgotPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Yunus Emre/Desktop/dersler/Mvc/Asp.NET Core MVC Projects/Asp.NET-Core-MVC-Projects/WordGame/WordGame/Views/Auth/ForgotPasswordResult.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxGb3Jnb3RQYXNzd29yZFJlc3VsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Yunus Emre/Desktop/dersler/Mvc/Asp.NET Core MVC Projects/Asp.NET-Core-MVC-Projects/WordGame/WordGame/Views/Auth/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -48,10 +64,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Yunus Emre/Desktop/dersler/Mvc/Asp.NET Core MVC Projects/Asp.NET-Core-MVC-Projects/WordGame/WordGame/Views/Puzzle/Result.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHV6emxlXFJlc3VsdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Yunus Emre/Desktop/dersler/Mvc/Asp.NET Core MVC Projects/Asp.NET-Core-MVC-Projects/WordGame/WordGame/Views/Quiz/ManualSelect.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxNYW51YWxTZWxlY3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Yunus Emre/Desktop/dersler/Mvc/Asp.NET Core MVC Projects/Asp.NET-Core-MVC-Projects/WordGame/WordGame/Views/Quiz/Result.cshtml]

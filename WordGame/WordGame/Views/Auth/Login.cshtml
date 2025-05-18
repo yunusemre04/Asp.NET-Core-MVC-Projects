@@ -63,6 +63,10 @@
             <input asp-for="Password" type="password" class="form-control" />
             <span asp-validation-for="Password" class="text-danger small"></span>
         </div>
+        <div class="text-end  mb-2">
+            <a asp-action="ForgotPassword" class="link-secondary " style="text-decoration:none">🔑 Şifremi Unuttum</a>
+        </div>
+
         @if (TempData["LoginError"] != null)
         {
             <p class="text-danger text-center ">@TempData["LoginError"]</p>
