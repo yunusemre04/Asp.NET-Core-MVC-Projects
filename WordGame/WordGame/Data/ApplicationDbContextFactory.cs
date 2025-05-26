@@ -6,12 +6,13 @@
     using System.IO;
 
     public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
-    {
+    {   
+        //Connecting to Database and creating database context
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
 
-            // Connection string'i appsettings.json'dan okuyalım
+          
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")

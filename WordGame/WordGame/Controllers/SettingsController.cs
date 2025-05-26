@@ -12,7 +12,7 @@ namespace WordGame.Controllers
         {
             _context = context;
         }
-
+        //Returns Settings Screen 
         [HttpGet]
         public IActionResult Index()
         {
@@ -30,6 +30,8 @@ namespace WordGame.Controllers
             return View(model);
         }
 
+
+        //Function save daily word limit
         [HttpPost]
         public async Task<IActionResult> Index(UserSettingsViewModel model)
         {

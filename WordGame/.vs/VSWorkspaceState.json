@@ -4,6 +4,7 @@
     "\\WordGame",
     "\\WordGame\\Models",
     "\\WordGame\\Models\\Entities",
+    "\\WordGame\\Services",
     "\\WordGame\\Views",
     "\\WordGame\\Views\\Auth",
     "\\WordGame\\Views\\Puzzle",
@@ -11,6 +12,6 @@
     "\\WordGame\\Views\\Shared",
     "\\WordGame\\Views\\Word"
   ],
-  "SelectedNode": "\\WordGame\\Views\\Word\\List.cshtml",
+  "SelectedNode": "\\WordGame\\Services\\AuthService.cs",
   "PreviewInSolutionExplorer": false
 }

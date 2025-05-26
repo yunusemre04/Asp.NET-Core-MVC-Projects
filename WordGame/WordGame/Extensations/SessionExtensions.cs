@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Http;
     using System.Text.Json;
 
+    //This part provides to set an object to json and calling back with getObject part
     public static class SessionExtensions
     {
         public static void SetObjectAsJson(this ISession session, string key, object value)

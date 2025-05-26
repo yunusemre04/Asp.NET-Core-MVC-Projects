@@ -13,7 +13,8 @@ namespace WordGame.Controllers
         {
             _context = context;
         }
-
+        
+        //Returns Report screen and shows stats 
         public IActionResult Index()
         {
             var userId = HttpContext.Session.GetInt32("UserId");
@@ -22,7 +23,7 @@ namespace WordGame.Controllers
 
             var progressList = _context.QuizProgresses
                 .Where(q => q.UserId == userId)
-                .Include(q => q.Word) // WordName erişimi için gerekli
+                .Include(q => q.Word) 
                 .ToList();
 
             int total = progressList.Count;

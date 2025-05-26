@@ -19,12 +19,14 @@ namespace WordGame.Controllers
             _env = env;
         }
 
+        //Returns Add Screen
         [HttpGet]
         public IActionResult Add()
         {
             return View();
         }
 
+        //Saving word
         [HttpPost]
         public async Task<IActionResult> Add(AddWordViewModel model)
         {
@@ -85,12 +87,14 @@ namespace WordGame.Controllers
             return RedirectToAction("List");
         }
 
+        //Returns word list
         public IActionResult List()
         {
             var words = _context.Words.ToList();
             return View(words);
         }
 
+        //Deleting word
         [HttpPost]
         public IActionResult Delete(int id)
         {

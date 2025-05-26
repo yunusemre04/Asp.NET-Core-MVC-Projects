@@ -16,12 +16,15 @@ namespace WordGame.Controllers
             _context = context;
         }
 
+        //Returns Word select screen 
         [HttpGet]
         public IActionResult Select()
         {
             return View();
         }
 
+
+        //Returns Quiz Screen with words 
         public IActionResult Start()
         {
             var userId = HttpContext.Session.GetInt32("UserId");
@@ -32,6 +35,7 @@ namespace WordGame.Controllers
             return View(quizWords);
         }
 
+        //Returns Word to Start screen randomly
         public IActionResult StartRandom(int count)
         {
             var userId = HttpContext.Session.GetInt32("UserId");
@@ -51,7 +55,7 @@ namespace WordGame.Controllers
                 if (expectedNext <= now)
                 {
                     var word = _context.Words
-                        .Include(w => w.WordSamples) // ✅ Eklendi
+                        .Include(w => w.WordSamples) 
                         .FirstOrDefault(w => w.WordId == progress.WordId);
 
                     if (word != null)
@@ -59,16 +63,16 @@ namespace WordGame.Controllers
                 }
             }
 
-            int eksik = count - todayQuizWords.Count;
-            if (eksik > 0)
+            int left = count - todayQuizWords.Count;
+            if (left > 0)
             {
                 var alreadyInProgressIds = progressList.Select(p => p.WordId).ToList();
 
                 var newWords = _context.Words
-                    .Include(w => w.WordSamples) // ✅ Eklendi
+                    .Include(w => w.WordSamples) 
                     .Where(w => !alreadyInProgressIds.Contains(w.WordId))
                     .OrderBy(x => Guid.NewGuid())
-                    .Take(eksik)
+                    .Take(left)
                     .ToList();
 
                 foreach (var word in newWords)
@@ -100,7 +104,7 @@ namespace WordGame.Controllers
         }
 
 
-
+        //Returns Todays words 
         private List<Word> GetTodayWords(int userId)
         {
             var wordList = new List<Word>();
@@ -133,7 +137,7 @@ namespace WordGame.Controllers
                 var knownWordsIds = progressList.Select(p => p.WordId).ToList();
 
                 var newWords = _context.Words
-                    .Include(w => w.WordSamples) // ✅ Buraya da dikkat
+                    .Include(w => w.WordSamples) 
                     .Where(w => !knownWordsIds.Contains(w.WordId))
                     .Take(remain)
                     .ToList();
@@ -146,7 +150,7 @@ namespace WordGame.Controllers
 
 
 
-
+        //Determine which word when it's take
         private DateTime GetNextRepeatDate(DateTime lastDate, int correctCount)
         {
             return correctCount switch
@@ -160,7 +164,8 @@ namespace WordGame.Controllers
                 _ => lastDate
             };
         }
-
+        
+        //Quiz answer controle with entered by user
         [HttpPost]
         public async Task<IActionResult> Submit(QuizSubmitViewModel model)
         {
@@ -181,7 +186,7 @@ namespace WordGame.Controllers
                 var progress = await _context.QuizProgresses
                     .FirstOrDefaultAsync(p => p.UserId == userId && p.WordId == answer.WordId);
 
-                // Küçük büyük harf farkı yok!
+                
                 bool isCorrect = string.Equals(word?.TurWordName?.Trim(), answer.UserAnswer?.Trim(), StringComparison.OrdinalIgnoreCase);
 
                 if (isCorrect)

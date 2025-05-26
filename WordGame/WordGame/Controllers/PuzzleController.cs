@@ -14,7 +14,7 @@ namespace WordGame.Controllers
             _context = context;
         }
 
-       
+        //Returns Puzzle page with collecting word data
         public IActionResult Index()
         {
             var userId = HttpContext.Session.GetInt32("UserId");
@@ -43,6 +43,7 @@ namespace WordGame.Controllers
             return View(new PuzzleGameViewModel());
         }
 
+        //This function controle guess and returns result
         [HttpPost]
         public IActionResult Submit(string guess, PuzzleGameViewModel model)
         {
@@ -55,7 +56,7 @@ namespace WordGame.Controllers
             if (guess.Length != answer.Length)
             {
                 model.Message = $"Lütfen {answer.Length} harfli bir kelime girin.";
-                return View("Index", LoadModelFromSession(model)); // geçmişi geri yükle
+                return View("Index", LoadModelFromSession(model)); 
             }
 
             var feedback = new List<PuzzleLetterFeedback>();

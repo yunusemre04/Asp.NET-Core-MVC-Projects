@@ -5,6 +5,7 @@
     using WordGame.Models;
     using WordGame.Models.Entities;
 
+    //This part controles register and login process 
     public class AuthService
     {
         private readonly ApplicationDbContext _context;

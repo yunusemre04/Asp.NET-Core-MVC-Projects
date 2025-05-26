@@ -3,6 +3,7 @@
     int total = ViewBag.Total ?? 0;
     int correct = ViewBag.Correct ?? 0;
 
+
     double percent = total > 0 ? (double)correct / total * 100 : 0;
     string message = percent switch
     {
