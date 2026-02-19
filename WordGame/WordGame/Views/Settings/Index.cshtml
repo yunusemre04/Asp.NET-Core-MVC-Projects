@@ -2,7 +2,7 @@
 @model UserSettingsViewModel
 
 @{
-    ViewData["Title"] = "Kullanıcı Ayarları";
+    ViewData["Title"] = @Localizer["PageTitle"];
 }
 
 <style>
@@ -31,10 +31,10 @@
         border-radius: 10px;
     }
 
-        .form-control:focus {
-            border-color: #6a11cb;
-            box-shadow: 0 0 0 0.15rem rgba(106, 17, 203, 0.2);
-        }
+    .form-control:focus {
+        border-color: #6a11cb;
+        box-shadow: 0 0 0 0.15rem rgba(106, 17, 203, 0.2);
+    }
 
     .btn-modern {
         background: linear-gradient(135deg, #6a11cb, #2575fc);
@@ -47,26 +47,26 @@
         transition: all 0.2s ease-in-out;
     }
 
-        .btn-modern:hover {
-            transform: translateY(-2px);
-            opacity: 0.95;
-        }
+    .btn-modern:hover {
+        transform: translateY(-2px);
+        opacity: 0.95;
+    }
 
     .settings-footer {
         text-align: center;
         margin-top: 25px;
     }
 
-        .settings-footer a {
-            text-decoration: none;
-            font-weight: 600;
-            color: #2575fc;
-        }
+    .settings-footer a {
+        text-decoration: none;
+        font-weight: 600;
+        color: #2575fc;
+    }
 </style>
 
 <div class="settings-card">
     <div class="settings-title">
-        <i class="fa-solid fa-gear text-primary me-2"></i> Kullanıcı Ayarları
+        <i class="fa-solid fa-gear text-primary me-2"></i> @Localizer["PageHeader"]
     </div>
 
     @if (ViewBag.Message != null)
@@ -78,22 +78,21 @@
 
     <form asp-action="Index" method="post" novalidate>
         <div class="mb-3">
-            <label asp-for="DailyWordLimit" class="form-label">Günlük Yeni Kelime Limiti</label>
+            <label asp-for="DailyWordLimit" class="form-label">@Localizer["DailyWordLimitLabel"]</label>
             <input asp-for="DailyWordLimit" class="form-control" type="number" min="1" max="100" />
             <span asp-validation-for="DailyWordLimit" class="text-danger small"></span>
         </div>
 
         <div class="text-center">
             <button type="submit" class="btn btn-modern">
-                <i class="fa-solid fa-save me-2"></i> Ayarları Kaydet
+                <i class="fa-solid fa-save me-2"></i> @Localizer["SaveButton"]
             </button>
         </div>
     </form>
 
     <div class="settings-footer mt-4">
         <a asp-controller="Auth" asp-action="ChangePassword">
-            <i class="fa-solid fa-key me-1"></i> Şifreni Değiştir
+            <i class="fa-solid fa-key me-1"></i> @Localizer["ChangePasswordLink"]
         </a>
     </div>
 </div>
-

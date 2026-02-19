@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WordGame.Models;
+using Microsoft.AspNetCore.Localization;
 
 namespace WordGame.Controllers
 {
@@ -16,6 +17,24 @@ namespace WordGame.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        //Change Language
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions
+                {
+                    Expires = DateTimeOffset.UtcNow.AddYears(1),
+                    IsEssential = true,
+                    Path = "/"
+                }
+            );
+
+            return LocalRedirect(returnUrl ?? "/");
         }
 
         //Error Controle

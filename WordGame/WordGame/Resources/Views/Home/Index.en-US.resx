@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="WelcomeTitle" xml:space="preserve">
+    <value>Welcome to WordGame</value>
+  </data>
+  <data name="WelcomeGreeting" xml:space="preserve">
+    <value>Hello {0}! Let's refresh your knowledge and learn new words.</value>
+  </data>
+  <data name="WelcomeGuest" xml:space="preserve">
+    <value>Join us today and start learning English words!</value>
+  </data>
+  <data name="StartQuiz" xml:space="preserve">
+    <value>Start Quiz</value>
+  </data>
+  <data name="AddNewWord" xml:space="preserve">
+    <value>Add New Word</value>
+  </data>
+  <data name="ViewMyWords" xml:space="preserve">
+    <value>View My Words</value>
+  </data>
+  <data name="PlayPuzzle" xml:space="preserve">
+    <value>Play Puzzle</value>
+  </data>
+  <data name="RegisterNow" xml:space="preserve">
+    <value>Register Now</value>
+  </data>
+  <data name="LoginNow" xml:space="preserve">
+    <value>Login Now</value>
+  </data>
+  <data name="FeaturesTitle" xml:space="preserve">
+    <value>What Can You Do?</value>
+  </data>
+  <data name="FeatureQuizTitle" xml:space="preserve">
+    <value>Test Your Knowledge</value>
+  </data>
+  <data name="FeatureQuizDesc" xml:space="preserve">
+    <value>Take quizzes with various question types and track your progress.</value>
+  </data>
+  <data name="FeatureLearnTitle" xml:space="preserve">
+    <value>Learn New Words</value>
+  </data>
+  <data name="FeatureLearnDesc" xml:space="preserve">
+    <value>Add words with meanings, examples, and mnemonics.</value>
+  </data>
+  <data name="FeaturePuzzleTitle" xml:space="preserve">
+    <value>Play Puzzles</value>
+  </data>
+  <data name="FeaturePuzzleDesc" xml:space="preserve">
+    <value>Solve word puzzles and improve your spelling skills.</value>
+  </data>
+  <data name="FeatureTrackTitle" xml:space="preserve">
+    <value>Track Progress</value>
+  </data>
+  <data name="FeatureTrackDesc" xml:space="preserve">
+    <value>View detailed statistics and analysis of your learning journey.</value>
+  </data>
+  <data name="FeatureRepetitionTitle" xml:space="preserve">
+    <value>6 Times Repetition</value>
+  </data>
+  <data name="FeatureRepetitionDesc" xml:space="preserve">
+    <value>Special algorithm repetition system for permanent learning.</value>
+  </data>
+  <data name="FeatureGamesTitle" xml:space="preserve">
+    <value>Puzzles and Games</value>
+  </data>
+  <data name="FeatureGamesDesc" xml:space="preserve">
+    <value>Reinforce words with games. Learn while having fun!</value>
+  </data>
+  <data name="FeatureStatsTitle" xml:space="preserve">
+    <value>Statistics and Analysis</value>
+  </data>
+  <data name="FeatureStatsDesc" xml:space="preserve">
+    <value>See your progress, discover your strengths and weaknesses.</value>
+  </data>
+</root>

@@ -13,7 +13,7 @@ namespace WordGame.Controllers
         {
             _context = context;
         }
-        
+
         //Returns Report screen and shows stats 
         public IActionResult Index()
         {
@@ -23,7 +23,7 @@ namespace WordGame.Controllers
 
             var progressList = _context.QuizProgresses
                 .Where(q => q.UserId == userId)
-                .Include(q => q.Word) 
+                .Include(q => q.Word)
                 .ToList();
 
             int total = progressList.Count;
@@ -43,7 +43,7 @@ namespace WordGame.Controllers
                 .Where(p => p.Word != null)
                 .Select(p => new WordProgressViewModel
                 {
-                    WordName = p.Word.EngWordName,
+                    WordName = p.Word!.EngWordName,
                     CorrectCount = p.CorrectCount
                 })
                 .OrderBy(w => w.WordName)

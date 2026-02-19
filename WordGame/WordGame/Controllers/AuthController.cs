@@ -13,7 +13,7 @@ namespace WordGame.Controllers
             private readonly AuthService _authService;
             private readonly ApplicationDbContext _context;
 
-            public AuthController(AuthService authService,ApplicationDbContext context)
+            public AuthController(AuthService authService, ApplicationDbContext context)
             {
                 _authService = authService;
                 _context = context;
@@ -70,7 +70,7 @@ namespace WordGame.Controllers
                 }
 
                 // Saving user information to Session
-                HttpContext.Session.SetString("UserName", user.UserName);
+                HttpContext.Session.SetString("UserName", user.UserName ?? string.Empty);
                 HttpContext.Session.SetInt32("UserId", user.UserId);
 
                 return RedirectToAction("Index", "Home");
@@ -103,8 +103,8 @@ namespace WordGame.Controllers
                     ModelState.AddModelError("Email", "Bu e-posta adresine kayıtlı kullanıcı bulunamadı.");
                     return View(model);
                 }
-                
-                var newPassword = Guid.NewGuid().ToString().Substring(0, 8); 
+
+                var newPassword = Guid.NewGuid().ToString().Substring(0, 8);
                 user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(newPassword);
                 _context.Users.Update(user);
                 _context.SaveChanges();

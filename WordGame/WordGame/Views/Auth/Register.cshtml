@@ -2,7 +2,7 @@
 @model RegisterViewModel
 
 @{
-    ViewData["Title"] = "Kayıt Ol";
+    ViewData["Title"] = Localizer["PageTitle"];
 }
 
 <style>
@@ -12,7 +12,7 @@
         padding: 40px 30px;
         border-radius: 15px;
         background-color: #fff;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
 
     .register-icon {
@@ -33,46 +33,46 @@
         font-weight: 500;
     }
 
-        .btn-register:hover {
-            opacity: 0.95;
-        }
+    .btn-register:hover {
+        opacity: 0.95;
+    }
 </style>
 
 <div class="register-card">
 
     <div class="text-center mb-4">
         <i class="fa-solid fa-user-plus register-icon"></i>
-        <h3 class="fw-bold">Kayıt Ol</h3>
-        <p class="text-muted small">Yeni hesap oluşturmak için bilgilerini doldur.</p>
+        <h3 class="fw-bold">@Localizer["RegisterTitle"]</h3>
+        <p class="text-muted small">@Localizer["RegisterDescription"]</p>
     </div>
 
     <form asp-action="Register" method="post" novalidate>
         <div class="mb-3">
-            <label asp-for="UserName" class="form-label">Kullanıcı Adı</label>
+            <label asp-for="UserName" class="form-label">@Localizer["UserName"]</label>
             <input asp-for="UserName" required class="form-control" />
             <span asp-validation-for="UserName" class="text-danger small"></span>
         </div>
 
         <div class="mb-3">
-            <label asp-for="Email" class="form-label"></label>
+            <label asp-for="Email" class="form-label">@Localizer["Email"]</label>
             <input asp-for="Email" required class="form-control" />
             <span asp-validation-for="Email" class="text-danger small"></span>
         </div>
 
         <div class="mb-3">
-            <label asp-for="Password" class="form-label">Şifre</label>
+            <label asp-for="Password" class="form-label">@Localizer["Password"]</label>
             <input asp-for="Password" required type="password" class="form-control" />
             <span asp-validation-for="Password" class="text-danger small"></span>
         </div>
 
         <div class="mb-4">
-            <label asp-for="ConfirmPassword" class="form-label">Şifre Tekrarı</label>
+            <label asp-for="ConfirmPassword" class="form-label">@Localizer["ConfirmPassword"]</label>
             <input asp-for="ConfirmPassword" required type="password" class="form-control" />
             <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
         </div>
 
         <button type="submit" class="btn btn-register w-100 py-2">
-            <i class="fa-solid fa-user-check me-2"></i> Hesap Oluştur
+            <i class="fa-solid fa-user-check me-2"></i> @Localizer["CreateAccount"]
         </button>
     </form>
 </div>

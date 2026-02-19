@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Quiz Seçimi";
+    ViewData["Title"] = Localizer["PageTitle"];
 }
 
 <style>
@@ -9,15 +9,15 @@
         padding: 40px;
         border-radius: 16px;
         background: linear-gradient(to right, #ffffff, #f0f4ff);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
     }
 
-        .quiz-select-container h3 {
-            text-align: center;
-            font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 30px;
-        }
+    .quiz-select-container h3 {
+        text-align: center;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 30px;
+    }
 
     .btn-gradient {
         background: linear-gradient(135deg, #6a11cb, #2575fc);
@@ -30,10 +30,10 @@
         transition: all 0.2s ease-in-out;
     }
 
-        .btn-gradient:hover {
-            opacity: 0.95;
-            transform: translateY(-1px);
-        }
+    .btn-gradient:hover {
+        opacity: 0.95;
+        transform: translateY(-1px);
+    }
 
     .manual-btn {
         text-align: center;
@@ -42,22 +42,22 @@
 </style>
 
 <div class="quiz-select-container">
-    <h3><i class="fa-solid fa-play me-2 text-primary"></i>Quiz Başlat</h3>
+    <h3><i class="fa-solid fa-play me-2 text-primary"></i>@Localizer["PageHeader"]</h3>
 
     <form asp-action="StartRandom" method="get">
         <div class="mb-3">
-            <label class="form-label">Kaç kelimeyle quiz yapmak istersiniz?</label>
+            <label class="form-label">@Localizer["WordCountLabel"]</label>
             <select class="form-select" name="count" required>
-                <option value="5">5 Kelime</option>
-                <option value="10">10 Kelime</option>
-                <option value="15">15 Kelime</option>
+                <option value="5">@Localizer["WordCount5"]</option>
+                <option value="10">@Localizer["WordCount10"]</option>
+                <option value="15">@Localizer["WordCount15"]</option>
             </select>
         </div>
 
         <button type="submit" class="btn btn-gradient w-100 mt-3">
-            <i class="fa-solid fa-bolt me-1"></i> Hızlı Quiz Başlat
+            <i class="fa-solid fa-bolt me-1"></i> @Localizer["StartButton"]
         </button>
     </form>
 
-   
+
 </div>

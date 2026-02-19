@@ -54,7 +54,7 @@ namespace WordGame.Controllers
             _context.Words.Update(word);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Details", "Word", new { id = word.WordId });
+            return RedirectToAction("", "", new { id = word.WordId });
         }
     }
 

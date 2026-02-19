@@ -11,10 +11,10 @@ namespace WordGame.Models.Entities
         public int UserId { get; set; }
         public int WordId { get; set; }
 
-        public int CorrectCount { get; set; } // kaç adımı tamamladı
+        public int CorrectCount { get; set; } 
 
-        public DateTime LastAnsweredDate { get; set; } // son bilindiği tarih
-        public bool IsCompleted { get; set; } // 6 adımı tamamladı mı?
+        public DateTime LastAnsweredDate { get; set; }
+        public bool IsCompleted { get; set; }
 
         [ForeignKey("WordId")]
         public Word? Word { get; set; }

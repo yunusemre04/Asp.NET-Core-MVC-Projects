@@ -1,6 +1,7 @@
 ﻿@using WordGame.Models.ViewModels;
 @model PuzzleGameViewModel
 @{
+    ViewData["Title"] = @Localizer["PageTitle"];
     var puzzleWord = Context.Session.GetString("PuzzleWord") ?? "";
 }
 
@@ -55,24 +56,24 @@
         margin-top: 30px;
     }
 
-        .guess-form input {
-            width: 160px;
-            padding: 10px;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
+    .guess-form input {
+        width: 160px;
+        padding: 10px;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
 
-        .guess-form button {
-            margin-left: 10px;
-            padding: 10px 18px;
-            background-color: #2575fc;
-            color: white;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-        }
+    .guess-form button {
+        margin-left: 10px;
+        padding: 10px 18px;
+        background-color: #2575fc;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+    }
 
     .message {
         text-align: center;
@@ -81,7 +82,7 @@
     }
 </style>
 
-<h2 class="text-center mb-4">🧩 Bulmaca (Wordle)</h2>
+<h2 class="text-center mb-4">🧩 @Localizer["PageHeader"]</h2>
 
 @if (TempData["Error"] != null)
 {
@@ -90,7 +91,9 @@
         <div>
             @TempData["Error"]
         </div>
-        <a asp-controller="Word" asp-action="Add" style="background: linear-gradient(135deg, #6a11cb, #2575fc); box-shadow: 0 -5px 20px rgba(0,0,0,0.1);color:white" class="btn ms-auto">Kelime ekle</a>
+        <a asp-controller="Word" asp-action="Add"
+           style="background: linear-gradient(135deg, #6a11cb, #2575fc); box-shadow: 0 -5px 20px rgba(0,0,0,0.1);color:white"
+           class="btn ms-auto">@Localizer["AddWordButton"]</a>
     </div>
 }
 else
@@ -101,7 +104,12 @@ else
             <div class="wordle-row">
                 @for (int i = 0; i < puzzleWord.Length; i++)
                 {
-                    var letter = i < attempt.Feedback.Count ? attempt.Feedback[i] : new PuzzleLetterFeedback { Letter = ' ', Status = "absent" };
+                    var letter = i < attempt.Feedback.Count ? attempt.Feedback[i] : new PuzzleLetterFeedback
+                    {
+                        Letter = ' ',
+                        Status
+        = "absent"
+                    };
                     <div class="wordle-tile @letter.Status">@letter.Letter</div>
                 }
             </div>
@@ -124,8 +132,9 @@ else
     {
         <div class="guess-form ">
             <form asp-action="Submit" method="post">
-                <input name="guess" maxlength="@puzzleWord.Length" minlength="@puzzleWord.Length" required placeholder="@puzzleWord.Length harfli kelime" />
-                <button type="submit">Tahmin Et</button>
+                <input name="guess" maxlength="@puzzleWord.Length" minlength="@puzzleWord.Length" required
+                       placeholder="@string.Format(Localizer["GuessPlaceholder"].Value, puzzleWord.Length)" />
+                <button type="submit">@Localizer["GuessButton"]</button>
             </form>
 
         </div>
@@ -135,9 +144,8 @@ else
         <div class="message">
             <strong>@Model.Message</strong>
             <div class="mt-3">
-                <a asp-action="Restart" asp-controller="Puzzle" class="btn btn-success">Yeni Oyun Başlat</a>
+                <a asp-action="Restart" asp-controller="Puzzle" class="btn btn-success">@Localizer["NewGameButton"]</a>
             </div>
         </div>
     }
 }
-

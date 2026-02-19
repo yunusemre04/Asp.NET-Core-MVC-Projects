@@ -2,7 +2,7 @@
 @model LoginViewModel
 
 @{
-    ViewData["Title"] = "Giriş Yap";
+    ViewData["Title"] = Localizer["LoginTitle"];
 }
 
 <style>
@@ -11,14 +11,14 @@
         margin: 60px auto;
         padding: 40px 30px;
         border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         background-color: #ffffff;
         transition: all 0.3s ease-in-out;
     }
 
-        .login-card:hover {
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-        }
+    .login-card:hover {
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }
 
     .login-icon {
         font-size: 40px;
@@ -38,44 +38,44 @@
         font-weight: 500;
     }
 
-        .btn-login:hover {
-            opacity: 0.95;
-        }
+    .btn-login:hover {
+        opacity: 0.95;
+    }
 </style>
 
 <div class="login-card">
 
     <div class="text-center mb-4">
         <i class="fa-solid fa-right-to-bracket login-icon"></i>
-        <h3 class="fw-bold">Giriş Yap</h3>
-        <p class="text-muted small">Hoş geldin! Devam etmek için giriş yap.</p>
+        <h3 class="fw-bold">@Localizer["LoginTitle"]</h3>
+        <p class="text-muted small">@Localizer["WelcomeMessage"]</p>
     </div>
 
     <form asp-action="Login" method="post" novalidate>
         <div class="mb-3">
-            <label asp-for="Email" class="form-label"></label>
+            <label asp-for="Email" class="form-label">@Localizer["EmailLabel"]</label>
             <input asp-for="Email" class="form-control" />
             <span asp-validation-for="Email" class="text-danger small"></span>
         </div>
 
         <div class="mb-4">
-            <label asp-for="Password" class="form-label">Şifre</label>
+            <label asp-for="Password" class="form-label">@Localizer["PasswordLabel"]</label>
             <input asp-for="Password" type="password" class="form-control" />
             <span asp-validation-for="Password" class="text-danger small"></span>
         </div>
         <div class="text-end  mb-2">
-            <a asp-action="ForgotPassword" class="link-secondary " style="text-decoration:none">🔑 Şifremi Unuttum</a>
-        </div>
+            <a asp-action="ForgotPassword" class="link-secondary " style="text-decoration:none">🔑
+                @Localizer["ForgotPassword"]</a>
+            </div>
 
-        @if (TempData["LoginError"] != null)
-        {
-            <p class="text-danger text-center ">@TempData["LoginError"]</p>
-        }
+            @if (TempData["LoginError"] != null)
+            {
+                <p class="text-danger text-center ">@TempData["LoginError"]</p>
+            }
 
-        <button type="submit" class="btn btn-login w-100 py-2">
-            <i class="fa-solid fa-arrow-right-to-bracket me-2"></i> Giriş Yap
-        </button>
-    </form>
+            <button type="submit" class="btn btn-login w-100 py-2">
+                <i class="fa-solid fa-arrow-right-to-bracket me-2"></i> @Localizer["LoginButton"]
+            </button>
+        </form>
 
-</div>
-
+    </div>

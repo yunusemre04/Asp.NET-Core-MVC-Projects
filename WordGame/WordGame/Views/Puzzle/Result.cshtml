@@ -1,5 +1,9 @@
-﻿<h2>Sonuç</h2>
+﻿@{
+    ViewData["Title"] = @Localizer["PageTitle"];
+}
 
-<p><strong>@ViewBag.Total</strong> sorudan <strong>@ViewBag.Correct</strong> tanesini doğru bildiniz!</p>
+<h2>@Localizer["PageTitle"]</h2>
 
-<a asp-action="Index" class="btn btn-primary">Tekrar Oyna</a>
+<p>@string.Format(Localizer["ScoreLabel"].Value, ViewBag.Correct, ViewBag.Total)</p>
+
+<a asp-action="Index" class="btn btn-primary">@Localizer["PlayAgainButton"]</a>

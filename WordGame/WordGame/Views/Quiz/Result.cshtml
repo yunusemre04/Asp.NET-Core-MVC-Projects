@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Quiz Sonucu";
+    ViewData["Title"] = Localizer["PageTitle"];
     int total = ViewBag.Total ?? 0;
     int correct = ViewBag.Correct ?? 0;
 
@@ -7,18 +7,20 @@
     double percent = total > 0 ? (double)correct / total * 100 : 0;
     string message = percent switch
     {
-        >= 90 => "Mükemmel! 💯",
-        >= 70 => "Harika! 🚀",
-        >= 50 => "Fena değil, devam! 🔄",
-        _ => "Daha çok çalışmalısın! 💪"
+        >= 90 => Localizer["ResultExcellent"].Value,
+        >= 70 => Localizer["ResultGreat"].Value,
+        >= 50 => Localizer["ResultGood"].Value,
+        _ => Localizer["ResultNeedsWork"].Value
     };
-  
+
     var results = new List<(string Eng, string Tur, bool IsCorrect)>();
     if (TempData["AnswerResults"] != null)
     {
-        results = Newtonsoft.Json.JsonConvert.DeserializeObject<List<(string Eng, string Tur, bool IsCorrect)>>(
-            TempData["AnswerResults"].ToString()
-        );
+        var jsonString = TempData["AnswerResults"]?.ToString();
+        if (!string.IsNullOrEmpty(jsonString))
+        {
+            results = Newtonsoft.Json.JsonConvert.DeserializeObject<List<(string Eng, string Tur, bool IsCorrect)>>(jsonString) ?? new();
+        }
     }
 
 
@@ -57,26 +59,27 @@
         border: none;
     }
 
-        .btn-return:hover {
-            opacity: 0.9;
-        }
+    .btn-return:hover {
+        opacity: 0.9;
+    }
 </style>
 
 <div class="result-container">
-    <h2 class="mb-4"><i class="fa-solid fa-award me-2 text-warning"></i>Quiz Sonucu</h2>
+    <h2 class="mb-4"><i class="fa-solid fa-award me-2 text-warning"></i>@Localizer["PageHeader"]</h2>
 
     <div class="result-score">
-        @correct / @total Doğru
+        @string.Format(Localizer["ScoreLabel"].Value, correct, total)
     </div>
 
     <div class="result-message">
         @message
-    </div>zzz
+    </div>
 
     @if (results.Any())
     {
         <hr class="my-4" />
-        <h5 class="text-start mb-3"><i class="fa-solid fa-list-check text-success me-2"></i> Cevapların:</h5>
+        <h5 class="text-start mb-3"><i class="fa-solid fa-list-check text-success me-2"></i> @Localizer["AnswersHeader"]
+        </h5>
         <ul class="list-group text-start">
             @foreach (var item in results)
             {
@@ -94,6 +97,6 @@
 
 
     <a asp-action="Select" class="btn btn-return mt-4">
-        <i class="fa-solid fa-rotate-right me-2"></i> Yeni Quiz Başlat
+        <i class="fa-solid fa-rotate-right me-2"></i> @Localizer["NewQuizButton"]
     </a>
 </div>

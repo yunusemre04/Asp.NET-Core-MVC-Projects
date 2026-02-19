@@ -26,9 +26,9 @@ namespace WordGame.Controllers
                 var word = _context.QuizProgresses
                     .Where(p => p.UserId == userId && p.IsCompleted)
                     .Join(_context.Words, p => p.WordId, w => w.WordId, (p, w) => w)
-                    .Where(w => w.EngWordName.Length >= 3 && w.EngWordName.Length <= 8)
+                    .Where(w => w.EngWordName != null && w.EngWordName.Length >= 3 && w.EngWordName.Length <= 8)
                     .OrderBy(x => Guid.NewGuid())
-                    .Select(w => w.EngWordName.ToUpper())
+                    .Select(w => w.EngWordName!.ToUpper())
                     .FirstOrDefault();
 
                 if (word == null)
@@ -48,6 +48,9 @@ namespace WordGame.Controllers
         public IActionResult Submit(string guess, PuzzleGameViewModel model)
         {
             var answer = HttpContext.Session.GetString("PuzzleWord");
+
+            if (string.IsNullOrEmpty(answer) || string.IsNullOrEmpty(guess))
+                return RedirectToAction("Index");
             if (answer == null)
                 return RedirectToAction("Index");
 
@@ -56,7 +59,7 @@ namespace WordGame.Controllers
             if (guess.Length != answer.Length)
             {
                 model.Message = $"Lütfen {answer.Length} harfli bir kelime girin.";
-                return View("Index", LoadModelFromSession(model)); 
+                return View("Index", LoadModelFromSession(model));
             }
 
             var feedback = new List<PuzzleLetterFeedback>();
@@ -107,14 +110,14 @@ namespace WordGame.Controllers
 
         private PuzzleGameViewModel LoadModelFromSession(PuzzleGameViewModel model)
         {
-           
+
             model.Attempts = HttpContext.Session.GetObjectFromJson<List<PuzzleAttemptViewModel>>("PuzzleAttempts") ?? new List<PuzzleAttemptViewModel>();
             model.AttemptCount = model.Attempts.Count;
             return model;
         }
     }
 
-    
+
 
 
 }

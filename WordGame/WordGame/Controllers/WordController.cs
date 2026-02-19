@@ -4,9 +4,10 @@ using WordGame.Data;
 namespace WordGame.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    
+
     using global::WordGame.Models.Entities;
     using global::WordGame.Models.ViewModels;
+    using Microsoft.EntityFrameworkCore;
 
     public class WordController : Controller
     {
@@ -59,12 +60,15 @@ namespace WordGame.Controllers
 
             var userId = HttpContext.Session.GetInt32("UserId");
 
+            if (userId == null)
+                return RedirectToAction("Login", "Auth");
+
             var word = new Word
             {
                 EngWordName = model.EngWordName,
                 TurWordName = model.TurWordName,
                 Picture = imagePath,
-                UserId=userId.Value
+                UserId = userId.Value
             };
 
             _context.Words.Add(word);
@@ -112,6 +116,31 @@ namespace WordGame.Controllers
             _context.SaveChanges();
             return RedirectToAction("List");
         }
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null) return RedirectToAction("Login", "Auth");
+
+            var word = _context.Words
+                .Include(w => w.WordSamples)
+                .FirstOrDefault(w => w.WordId == id && w.UserId == userId);
+
+            if (word == null) return NotFound();
+
+            var model = new WordDetailViewModel
+            {
+                EngWordName = word.EngWordName,
+                TurWordName = word.TurWordName,
+                Picture = word.Picture,
+                MnemonicNote = word.MnemonicNote,
+                MnemonicImagePath = word.MnemonicImagePath,
+                SampleSentences = word.WordSamples?.Select(s => s.SampleSentence ?? string.Empty).ToList() ?? new()
+            };
+
+            return View(model);
+        }
+
 
 
     }

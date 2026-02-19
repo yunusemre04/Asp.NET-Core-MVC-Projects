@@ -2,7 +2,7 @@
 @model AddWordViewModel
 
 @{
-    ViewData["Title"] = "Kelime Ekle";
+    ViewData["Title"] = Localizer["PageTitle"];
 }
 
 <style>
@@ -74,48 +74,50 @@
         object-fit: cover;
         border-radius: 12px;
         margin-top: 10px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 </style>
 
 <div class="modern-word-card">
 
     <div class="modern-title">
-        <i class="fa-solid fa-circle-plus text-primary me-2"></i> Yeni Kelime Ekle
+        <i class="fa-solid fa-circle-plus text-primary me-2"></i> @Localizer["PageHeader"]
     </div>
 
     <form asp-action="Add" method="post" enctype="multipart/form-data" novalidate>
         <div class="mb-4">
-            <img id="imagePreview" class="preview-image" alt="Seçilen görsel önizlemesi" />
-            <label asp-for="PictureFile" class="form-label">Kelimeye ait görsel</label>
-            <input asp-for="PictureFile" type="file" class="form-control" accept="image/*" onchange="previewImage(event)" />
-            <span asp-validation-for="PictureFile" class="text-danger small"></span>   
+            <img id="imagePreview" class="preview-image" alt="@Localizer["ImagePreviewAlt"]" />
+            <label asp-for="PictureFile" class="form-label">@Localizer["ImageLabel"]</label>
+            <input asp-for="PictureFile" type="file" class="form-control" accept="image/*"
+                   onchange="previewImage(event)" />
+            <span asp-validation-for="PictureFile" class="text-danger small"></span>
         </div>
 
         <div class="mb-3">
-            <label asp-for="EngWordName" class="form-label">İngilizce Kelime</label>
-            <input asp-for="EngWordName" class="form-control" placeholder="Örn: innovation" />
+            <label asp-for="EngWordName" class="form-label">@Localizer["EnglishWordLabel"]</label>
+            <input asp-for="EngWordName" class="form-control" placeholder="@Localizer["EnglishWordPlaceholder"]" />
             <span asp-validation-for="EngWordName" class="text-danger small"></span>
         </div>
 
         <div class="mb-3">
-            <label asp-for="TurWordName" class="form-label">Türkçe Anlamı</label>
-            <input asp-for="TurWordName" class="form-control" placeholder="Örn: yenilik" />
+            <label asp-for="TurWordName" class="form-label">@Localizer["TurkishWordLabel"]</label>
+            <input asp-for="TurWordName" class="form-control" placeholder="@Localizer["TurkishWordPlaceholder"]" />
             <span asp-validation-for="TurWordName" class="text-danger small"></span>
         </div>
 
         <hr />
 
         <div class="mb-3">
-            <label class="form-label">Örnek Cümleler</label>
+            <label class="form-label">@Localizer["SampleSentencesLabel"]</label>
             @for (int i = 0; i < 3; i++)
             {
-                <input name="SampleSentences[@i]" class="form-control mb-2" placeholder="Cümle @(i + 1)" />
+                <input name="SampleSentences[@i]" class="form-control mb-2"
+                       placeholder="@string.Format(Localizer["SentencePlaceholder"].Value, i + 1)" />
             }
         </div>
 
         <button type="submit" class="btn btn-modern w-100 mt-3">
-            <i class="fa-solid fa-cloud-upload-alt me-2"></i> Kaydet ve Ekle
+            <i class="fa-solid fa-cloud-upload-alt me-2"></i> @Localizer["SaveButton"]
         </button>
     </form>
 </div>

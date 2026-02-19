@@ -55,7 +55,7 @@ namespace WordGame.Controllers
                 if (expectedNext <= now)
                 {
                     var word = _context.Words
-                        .Include(w => w.WordSamples) 
+                        .Include(w => w.WordSamples)
                         .FirstOrDefault(w => w.WordId == progress.WordId);
 
                     if (word != null)
@@ -69,7 +69,7 @@ namespace WordGame.Controllers
                 var alreadyInProgressIds = progressList.Select(p => p.WordId).ToList();
 
                 var newWords = _context.Words
-                    .Include(w => w.WordSamples) 
+                    .Include(w => w.WordSamples)
                     .Where(w => !alreadyInProgressIds.Contains(w.WordId))
                     .OrderBy(x => Guid.NewGuid())
                     .Take(left)
@@ -137,7 +137,7 @@ namespace WordGame.Controllers
                 var knownWordsIds = progressList.Select(p => p.WordId).ToList();
 
                 var newWords = _context.Words
-                    .Include(w => w.WordSamples) 
+                    .Include(w => w.WordSamples)
                     .Where(w => !knownWordsIds.Contains(w.WordId))
                     .Take(remain)
                     .ToList();
@@ -164,7 +164,7 @@ namespace WordGame.Controllers
                 _ => lastDate
             };
         }
-        
+
         //Quiz answer controle with entered by user
         [HttpPost]
         public async Task<IActionResult> Submit(QuizSubmitViewModel model)
@@ -186,7 +186,7 @@ namespace WordGame.Controllers
                 var progress = await _context.QuizProgresses
                     .FirstOrDefaultAsync(p => p.UserId == userId && p.WordId == answer.WordId);
 
-                
+
                 bool isCorrect = string.Equals(word?.TurWordName?.Trim(), answer.UserAnswer?.Trim(), StringComparison.OrdinalIgnoreCase);
 
                 if (isCorrect)
@@ -227,8 +227,12 @@ namespace WordGame.Controllers
                     }
 
                 }
-                 answerResults.Add((word.EngWordName, word.TurWordName, isCorrect));
-               
+
+                if (word != null)
+                {
+                    answerResults.Add((word.EngWordName ?? "", word.TurWordName ?? "", isCorrect));
+                }
+
             }
 
             await _context.SaveChangesAsync();
@@ -240,7 +244,7 @@ namespace WordGame.Controllers
         }
 
 
-        
+
 
 
     }

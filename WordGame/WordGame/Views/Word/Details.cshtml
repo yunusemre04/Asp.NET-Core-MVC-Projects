@@ -1,0 +1,42 @@
+﻿@using WordGame.Models.ViewModels
+@model WordGame.Models.ViewModels.WordDetailViewModel
+
+<div class="container mt-5">
+    <div class="card shadow rounded-4 p-4">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <img src="@Model.Picture" alt="@Localizer["ImageAlt"]" class="img-fluid rounded shadow-sm" />
+            </div>
+
+            <div class="col-md-8">
+                <h2 class="fw-bold">@Model.EngWordName</h2>
+                <h4 class="text-muted">@Model.TurWordName</h4>
+
+                @if (!string.IsNullOrEmpty(Model.MnemonicNote))
+                {
+                    <hr />
+                    <h5><i class="fa-solid fa-brain me-2 text-primary"></i>@Localizer["MnemonicHeader"]</h5>
+                    <p>@Model.MnemonicNote</p>
+
+                    @if (!string.IsNullOrEmpty(Model.MnemonicImagePath))
+                    {
+                        <img src="@Model.MnemonicImagePath" class="img-thumbnail mt-2" alt="@Localizer["MnemonicImageAlt"]"
+                             style="max-height: 200px;" />
+                    }
+                }
+
+                @if (Model.SampleSentences.Any())
+                {
+                    <hr />
+                    <h5><i class="fa-solid fa-quote-left me-2 text-success"></i>@Localizer["SampleSentencesHeader"]</h5>
+                    <ul class="list-group">
+                        @foreach (var sentence in Model.SampleSentences)
+                        {
+                            <li class="list-group-item">@sentence</li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -16,7 +16,7 @@
         [Required]
         public string? PasswordHash { get; set; }
 
-        public int DailyWordLimit { get; set; } = 10; // varsayılan değer
+        public int DailyWordLimit { get; set; } = 10; 
 
         public ICollection<Word>? Words { get; set; }
     }

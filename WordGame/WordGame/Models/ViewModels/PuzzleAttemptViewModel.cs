@@ -3,7 +3,7 @@
     public class PuzzleLetterFeedback
     {
         public char Letter { get; set; }
-        public string Status { get; set; } // "correct", "present", "absent"
+        public required string Status { get; set; } // "correct", "present", "absent"
     }
 
     public class PuzzleAttemptViewModel

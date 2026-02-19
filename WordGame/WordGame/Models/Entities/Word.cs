@@ -22,9 +22,9 @@
         // Foreign Key
         public User? User { get; set; }
 
-        public string? MnemonicNote { get; set; } // açıklama
+        public string? MnemonicNote { get; set; } 
 
-        public string? MnemonicImagePath { get; set; } // opsiyonel görsel
+        public string? MnemonicImagePath { get; set; } 
 
     }
 

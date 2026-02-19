@@ -2,7 +2,7 @@
 @model MnemonicViewModel
 
 @{
-    ViewData["Title"] = "Hafıza Çivisi Ekle";
+    ViewData["Title"] = @Localizer["PageTitle"];
 }
 
 <style>
@@ -16,9 +16,9 @@
         transition: all 0.3s ease-in-out;
     }
 
-        .mnemonic-card:hover {
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
-        }
+    .mnemonic-card:hover {
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+    }
 
     .mnemonic-title {
         font-size: 1.8rem;
@@ -38,10 +38,10 @@
         transition: border-color 0.2s ease-in-out;
     }
 
-        .form-control:focus {
-            border-color: #6a11cb;
-            box-shadow: 0 0 0 0.2rem rgba(106, 17, 203, 0.15);
-        }
+    .form-control:focus {
+        border-color: #6a11cb;
+        box-shadow: 0 0 0 0.2rem rgba(106, 17, 203, 0.15);
+    }
 
     .btn-modern {
         background: linear-gradient(135deg, #6a11cb, #2575fc);
@@ -55,34 +55,35 @@
         transition: all 0.2s ease-in-out;
     }
 
-        .btn-modern:hover {
-            transform: translateY(-2px);
-            opacity: 0.95;
-        }
+    .btn-modern:hover {
+        transform: translateY(-2px);
+        opacity: 0.95;
+    }
 </style>
 
 <div class="mnemonic-card">
     <div class="mnemonic-title">
-        <i class="fa-solid fa-brain me-2 text-primary"></i> Hafıza Çivisi Ekle
+        <i class="fa-solid fa-brain me-2 text-primary"></i> @Localizer["PageHeader"]
     </div>
 
     <form asp-action="Add" method="post" enctype="multipart/form-data" novalidate>
         <input type="hidden" asp-for="WordId" />
 
         <div class="mb-3">
-            <label asp-for="MnemonicNote" class="form-label">Çağrışım / Not</label>
-            <textarea asp-for="MnemonicNote" class="form-control" rows="4" placeholder="Bu kelimeyi hatırlamak için ne kullanırsınız?"></textarea>
+            <label asp-for="MnemonicNote" class="form-label">@Localizer["MnemonicNoteLabel"]</label>
+            <textarea asp-for="MnemonicNote" class="form-control" rows="4"
+                      placeholder="@Localizer["MnemonicNotePlaceholder"]"></textarea>
             <span asp-validation-for="MnemonicNote" class="text-danger small"></span>
         </div>
 
         <div class="mb-4">
-            <label asp-for="MnemonicImage" class="form-label">Görsel (opsiyonel)</label>
+            <label asp-for="MnemonicImage" class="form-label">@Localizer["MnemonicImageLabel"]</label>
             <input asp-for="MnemonicImage" type="file" class="form-control" />
             <span asp-validation-for="MnemonicImage" class="text-danger small"></span>
         </div>
 
         <button type="submit" class="btn-modern">
-            <i class="fa-solid fa-paper-plane me-2"></i> Kaydet
+            <i class="fa-solid fa-paper-plane me-2"></i> @Localizer["SaveButton"]
         </button>
     </form>
 </div>
