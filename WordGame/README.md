@@ -4,7 +4,7 @@ A comprehensive ASP.NET Core MVC web application designed to help users learn an
 
 ## 📋 Overview
 
-WordGame is an interactive vocabulary learning platform that combines multiple learning methods to enhance language acquisition. Users can add words, create mnemonics, take quizzes, play word puzzles, and track their progress - all in a bilingual interface supporting both English and Turkish.
+WordGame is an interactive vocabulary learning platform that combines multiple learning methods to enhance language acquisition. Users can add words, create mnemonics, take quizzes, play word puzzles, and track their progress - all in a bilingual interface supporting both English and Turkish .
 
 ## ✨ Features
 
