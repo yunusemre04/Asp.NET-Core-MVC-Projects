@@ -71,52 +71,6 @@ WordGame is an interactive vocabulary learning platform that combines multiple l
 - **Resource Files (.resx)** - Bilingual resource management
 - **RequestLocalization Middleware** - Language detection and switching
 
-## 📦 Installation
-
-### Setup Instructions
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/WordGame.git
-   cd WordGame
-   ```
-
-2. **Configure Database Connection**
-   
-   Update the connection string in `appsettings.json`:
-   ```json
-   {
-     "ConnectionStrings": {
-       "DefaultConnection": "Server=YOUR_SERVER;Database=WordGameDb;Trusted_Connection=True;TrustServerCertificate=True;"
-     }
-   }
-   ```
-
-3. **Apply Database Migrations**
-   ```bash
-   dotnet ef database update
-   ```
-
-4. **Run the Application**
-   ```bash
-   dotnet run
-   ```
-
-5. **Access the Application**
-   
-   Open your browser and navigate to: `https://localhost:5001` or `http://localhost:5000`
-
-## 🚀 Usage
-
-### Getting Started
-
-1. **Register an Account**: Create a new user account from the registration page
-2. **Add Your First Word**: Navigate to "Add Word" and create your first vocabulary entry
-3. **Create Mnemonics**: Add memory pegs to help remember difficult words
-4. **Take Quizzes**: Test your knowledge with customizable quizzes
-5. **Play Puzzles**: Challenge yourself with the word puzzle game
-6. **Track Progress**: Monitor your learning in the Reports section
-
 ### Language Switching
 
 Click the language switcher in the navigation bar to toggle between English and Turkish. Your preference will be saved automatically.
@@ -172,14 +126,11 @@ var localizationOptions = new RequestLocalizationOptions()
 
 Session timeout and cookie settings can be modified in `Program.cs`.
 
-
 ## 🙏 Acknowledgments
 
 - Bootstrap for the responsive UI framework
 - Font Awesome for the comprehensive icon library
 - Microsoft for ASP.NET Core and Entity Framework Core
 - The open-source community for inspiration and support
-
-
 
 ⭐ If you found this project helpful, please consider giving it a star!
